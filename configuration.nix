@@ -86,8 +86,11 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
-    wget
+    htop
     git
+    powertop
+    cpufrequtils
+    brightnessctl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -132,6 +135,13 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=no
+    AllowHibernation=no
+    AllowHybridSleep=no
+    AllowSuspendThenHibernate=no
+  '';
 
 }
 
