@@ -1,5 +1,6 @@
 let
   mediaDir = "/data/media";
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in
 {
   systemd.tmpfiles.rules = [
