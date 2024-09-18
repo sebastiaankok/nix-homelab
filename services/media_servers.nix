@@ -29,8 +29,12 @@ in
 
   services.prowlarr = {
     enable = true;
-    dataDir = "${mediaDir}/prowlarr";
     openFirewall = true;
+  };
+
+  # Set custom data directory for prowlarr
+  systemd.services.prowlarr.environment = {
+    PROWLARR_DATA = "${mediaDir}/prowlarr";
   };
 
 }
