@@ -143,5 +143,7 @@
     AllowSuspendThenHibernate=no
   '';
 
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+
 }
 
