@@ -91,6 +91,7 @@
     powertop
     cpufrequtils
     brightnessctl
+    sysz
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
