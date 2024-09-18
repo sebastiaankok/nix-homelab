@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./services
+      ./services/media_servers.nix
     ];
 
   # Allow unfree packages
