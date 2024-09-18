@@ -32,9 +32,13 @@ in
     openFirewall = true;
   };
 
-  # Set custom data directory for prowlarr
-  systemd.services.prowlarr.environment = {
-    PROWLARR_DATA = "${mediaDir}/prowlarr";
+  # create bind mount so we can use custom data directory for prowlarr
+
+  systemd.mounts."prowlarr-data" = {
+    unit = "prowlarr.service";
+    source = "${mediaDir}/prowlarr";
+    target = "/var/lib/prowlarr";
+    options = [ "bind" ];
   };
 
 }
