@@ -10,6 +10,7 @@ in
   ];
 
   services.plex = {
+    package = unstable.plex;
     enable = true;
     dataDir = "${mediaDir}/plex/Library/Application Support";
     openFirewall = true;
