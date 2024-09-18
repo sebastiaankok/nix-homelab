@@ -1,4 +1,6 @@
-services.plex = {
-  enable = true;
-  dataDir = "/data/plex/plex";
-};
+{
+  services.plex = {
+    enable = true;
+    dataDir = "/data/plex/plex";
+  };
+}
