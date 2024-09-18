@@ -1,7 +1,7 @@
 {
   services.plex = {
     enable = true;
-    dataDir = "/data/plex/plex";
+    dataDir = "/data/media/plex/Library/Application Support/";
     openFirewall = true;
   };
 }
