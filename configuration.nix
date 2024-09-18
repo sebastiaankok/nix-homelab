@@ -23,6 +23,16 @@
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+
+  networking.interfaces.wlp2s0 = {
+    ipv4.addresses = [
+      {
+        address = "10.10.50.131"; # Virtual IP you want to assign
+        prefixLength = 24;        # The subnet mask, same as the main IP (255.255.255.0)
+      }
+    ];
+  };
+
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
