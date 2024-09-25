@@ -26,7 +26,6 @@ in
       package = pkgs-unstable.${app};
       enable = true;
       port = port;
-      openFirewall = false;
     };
 
     fileSystems."/var/lib/mealie" = {
