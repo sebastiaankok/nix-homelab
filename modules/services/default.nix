@@ -1,5 +1,6 @@
 {
   imports = [
+    ./mealie
     ./plex
     ./sonarr
     ./radarr
