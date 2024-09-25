@@ -23,9 +23,11 @@ in
   config = mkIf cfg.enable {
 
     services.${app} = {
-      package = pkgs-unstable.${app};
       enable = true;
       port = port;
+      settings = {
+        BASE_URL = "mealie.${domainName}";
+      };
     };
 
     fileSystems."/var/lib/mealie" = {
