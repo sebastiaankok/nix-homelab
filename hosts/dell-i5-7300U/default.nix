@@ -17,6 +17,7 @@
         home-assistant.enable = true;
         zigbee2mqtt.enable = true;
         mosquitto.enable = true;
+        mealie.enable = true;
         # media
         plex.enable = true;
         radarr.enable = true;
