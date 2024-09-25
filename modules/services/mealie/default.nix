@@ -24,10 +24,14 @@ in
 
     systemd.services.${app}.serviceConfig.ReadWritePaths = lib.mkForce [ "${appData}" ];
     services.${app} = {
+      package = pkgs-unstable.${app};
       enable = true;
       port = port;
       settings = {
-        BASE_URL = "mealie.${domainName}";
+        ALLOW_SIGNUP = "false";
+        BASE_URL = "https://${app}.${domainName}";
+        DATA_DIR = "${appData}";
+        ALEMBIC_CONFIG_FILE="${pkgs-unstable.mealie}/alembic.ini";
       };
     };
 
