@@ -3,5 +3,6 @@
     [
       ./frigate
       ./home-assistant
+      ./overseerr
     ];
 }
