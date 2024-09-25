@@ -2,6 +2,18 @@
 
 This repository manages my personal NixOS homelab and using flakes, enabling modularity, scalability, and ease of configuration across multiple machines.
 
+## Install from github
+```bash
+nixos-rebuild switch --flake github:sebastiaankok/nix-homelab#HOSTNAME
+```
+
+## Update a host from local path
+
+```bash
+cd ~/nix-config
+nixos-rebuild switch --flake . # This will automatically pick the configuration name based on the hostname
+```
+
 ## Structure
 
 - **`home/`**: User-specific configurations (currently unused).
