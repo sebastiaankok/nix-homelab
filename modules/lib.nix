@@ -24,12 +24,17 @@ with lib;
         "--keep-monthly 3"
       ];
       initialize = true;
+      backupPrepareCommand = ''
+        # remove stale locks - this avoids some occasional annoyance
+        #
+        ${pkgs.restic}/bin/restic unlock --remove-all || true
+      '';
     in
     {
 
       # gdrive backup
       "gdrive-${options.app}" = {
-        inherit pruneOpts timerConfig initialize;
+        inherit pruneOpts timerConfig initialize backupPrepareCommand;
         paths = options.paths;
         rcloneConfigFile = config.sops.secrets."rclone-config".path;
         passwordFile = config.sops.secrets."restic-repo-password".path;
