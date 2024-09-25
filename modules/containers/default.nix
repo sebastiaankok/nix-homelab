@@ -1,0 +1,7 @@
+{
+  imports =
+    [
+      ./frigate
+      ./home-assistant
+    ];
+}
