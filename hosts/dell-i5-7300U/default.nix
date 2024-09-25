@@ -23,6 +23,7 @@
         sonarr.enable = true;
         prowlarr.enable = true;
         sabnzbd.enable = true;
+        overseerr.enable = true;
       };
     };
   };
