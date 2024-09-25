@@ -22,17 +22,13 @@ in
 
   config = mkIf cfg.enable {
 
+    systemd.services.${app}.serviceConfig.ReadWritePaths = lib.mkForce [ "${appData}" ];
     services.${app} = {
       enable = true;
       port = port;
       settings = {
         BASE_URL = "mealie.${domainName}";
       };
-    };
-
-    fileSystems."/var/lib/mealie" = {
-      device = "${appData}";
-      options = ["bind"];
     };
 
     services.nginx = {
