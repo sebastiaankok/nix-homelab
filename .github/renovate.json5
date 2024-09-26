@@ -12,6 +12,7 @@
   "lockFileMaintenance": {
     "enabled": "true",
     "automerge": "false",
+    "schedule": ["before 4am on monday"],
   },
 
   "regexManagers": [{
