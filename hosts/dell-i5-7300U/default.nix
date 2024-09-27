@@ -25,6 +25,8 @@
         prowlarr.enable = true;
         sabnzbd.enable = true;
         overseerr.enable = true;
+        # system
+        prometheus.enable = true;
       };
     };
   };
