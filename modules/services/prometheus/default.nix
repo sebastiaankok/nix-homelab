@@ -56,7 +56,7 @@ in
           url = "https://prometheus-prod-24-prod-eu-west-2.grafana.net/api/prom/push";
           basic_auth = {
             username = "1680587";
-            password_file = config.sops.secrets."services/${app}/password_file".path;
+            password_file = config.sops.secrets."services/${app}/password".path;
           };
         }
       ];
