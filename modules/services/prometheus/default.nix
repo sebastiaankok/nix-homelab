@@ -21,6 +21,7 @@ in
 
     sops.secrets."services/${app}/password" = {
       sopsFile = ./secrets.sops.yaml;
+      owner = app;
       restartUnits = [ "${app}.service" ];
     };
 
