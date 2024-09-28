@@ -3,6 +3,7 @@
     ./prometheus
     ./mealie
     ./plex
+    ./jellyfin
     ./sonarr
     ./radarr
     ./prowlarr
