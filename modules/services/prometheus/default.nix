@@ -34,6 +34,7 @@ in
     services.${app} = {
       package = pkgs-unstable.${app};
       enable = true;
+      checkConfig = "syntax-only";
       enableReload = true;
       enableAgentMode = true;
       exporters = {
