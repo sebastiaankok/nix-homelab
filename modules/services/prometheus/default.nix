@@ -25,6 +25,12 @@ in
       restartUnits = [ "${app}.service" ];
     };
 
+    sops.secrets."services/${app}/scrape_hass" = {
+      sopsFile = ./secrets.sops.yaml;
+      owner = app;
+      restartUnits = [ "${app}.service" ];
+    };
+
     services.${app} = {
       package = pkgs-unstable.${app};
       enable = true;
@@ -44,6 +50,17 @@ in
             {
               targets = [
                 "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+              ];
+                labels.instance = config.networking.hostName;
+            }
+
+        {
+          job_name = "${config.networking.hostName}-hass";
+          bearer_token_file = config.sops.secrets."services/${app}/scrape_hass".path;
+          static_configs = [
+            {
+              targets = [
+                "127.0.0.1:8123"
               ];
                 labels.instance = config.networking.hostName;
             }
