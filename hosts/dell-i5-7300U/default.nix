@@ -20,6 +20,7 @@
         mealie.enable = true;
         # media
         plex.enable = true;
+        jellyfin.enable = true;
         radarr.enable = true;
         sonarr.enable = true;
         prowlarr.enable = true;
