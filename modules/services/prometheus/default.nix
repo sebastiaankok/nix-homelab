@@ -59,6 +59,9 @@ in
         {
           job_name = "${config.networking.hostName}-hass";
           bearer_token_file = config.sops.secrets."services/${app}/scrape_hass".path;
+          scrape_interval = "60s";
+          metrics_path = "/api/prometheus";
+
           static_configs = [
             {
               targets = [
