@@ -53,7 +53,8 @@ in
               ];
                 labels.instance = config.networking.hostName;
             }
-
+          ];
+        }
         {
           job_name = "${config.networking.hostName}-hass";
           bearer_token_file = config.sops.secrets."services/${app}/scrape_hass".path;
