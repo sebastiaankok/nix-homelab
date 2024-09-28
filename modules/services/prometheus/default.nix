@@ -25,7 +25,7 @@ in
       restartUnits = [ "${app}.service" ];
     };
 
-    sops.secrets."services/${app}/scrape_hass" = {
+    sops.secrets.scrape_hass = {
       sopsFile = ./secrets.sops.yaml;
       owner = app;
       restartUnits = [ "${app}.service" ];
@@ -57,7 +57,7 @@ in
         }
         {
           job_name = "${config.networking.hostName}-hass";
-          bearer_token_file = config.sops.secrets."services/${app}/scrape_hass".path;
+          bearer_token_file = config.sops.secrets.scrape_hass.path;
           static_configs = [
             {
               targets = [
