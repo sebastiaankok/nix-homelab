@@ -28,10 +28,18 @@
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-  # Pick only one of the below networking options.
-  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.hostName = "dell-i5-7300U";
+  networking.useDHCP = lib.mkDefault false;
+
+  systemd.network.enable = true;
+
+  systemd.network.networks."10-enp0s31f6" = {
+    matchConfig.Name = "enp0s31f6";
+    networkConfig = {
+      DHCP = "yes";
+      IPv6AcceptRA = true;  # Accept IPv6 router advertisements for IPv6 addresses
+    };
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/6eaeb99e-3972-40b5-beed-f03b3748d2fa";
@@ -47,13 +55,6 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/35b6cde3-8b21-4c2d-8f5b-c3c39d4229d1"; }
     ];
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  #networking.useDHCP = lib.mkDefault false;
-  networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
