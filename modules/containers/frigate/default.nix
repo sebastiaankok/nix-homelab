@@ -9,7 +9,7 @@ let
   domainName = config.hostConfig.domainName;
   user = "${app}";
   group = "${app}";
-  port = 5000;
+  port = 8971;
   uid = 1002;
   gid = 1002;
 in
@@ -73,7 +73,7 @@ in
         "--privileged"
         "--network=host"
       ];
-      ports = [ "5000:5000" "8554:8554" "8555:8555/tcp" "8555:8555/udp" ]; # expose port
+      ports = [ "127.0.0.1:8971:8971" "127.0.0.1:5000:5000" ];
 
       environmentFiles = [ config.sops.secrets."services/${app}/env".path ];
     };
