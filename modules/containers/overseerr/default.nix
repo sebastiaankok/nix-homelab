@@ -50,10 +50,7 @@ in
       volumes = [
         "${appData}:/app/config:rw"
       ];
-      extraOptions = [
-        "--network=host"
-      ];
-      ports = [ "5055:5055" ]; # expose port
+      ports = [ "127.0.0.1:5055:5055" ]; # expose port
     };
 
     services.nginx = {
