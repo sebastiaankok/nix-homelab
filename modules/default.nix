@@ -22,6 +22,21 @@ with lib;
     description = "Device role";
     default = "Server";
   };
+  options.hostConfig.interface = mkOption {
+    type = types.str;
+    description = "Network interface";
+    default = "eth1";
+  };
+  options.hostConfig.user = mkOption {
+    type = types.str;
+    description = "System user that gets added";
+    default = "bob";
+  };
+  options.hostConfig.sshPublicKey = mkOption {
+    type = types.str;
+    description = "System public key";
+    default = "";
+  };
 
 
   imports = [
