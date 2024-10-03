@@ -7,6 +7,7 @@
       domainName = (import ./secrets.nix).domainName;
       user = "sebastiaan";
       interface = "enp0s31f6";
+      sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOTvwNAE0ZUIgEZRlZqw48o5Sw8gZuCPaYUPUHEp/vtg sebastiaan@linux.com";
       system = {
         acme = {
           enable = true;
