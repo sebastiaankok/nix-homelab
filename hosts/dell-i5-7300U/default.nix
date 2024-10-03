@@ -4,7 +4,7 @@
   config = {
     hostConfig = {
       dataDir = "/data";
-      domainName = "***REMOVED***";
+      domainName = (import ./secrets.nix).domainName;
       system = {
         acme = {
           enable = true;
@@ -18,14 +18,6 @@
         zigbee2mqtt.enable = true;
         mosquitto.enable = true;
         mealie.enable = true;
-        # media
-        plex.enable = true;
-        jellyfin.enable = true;
-        radarr.enable = true;
-        sonarr.enable = true;
-        prowlarr.enable = true;
-        sabnzbd.enable = true;
-        overseerr.enable = true;
         # system
         prometheus.enable = true;
       };
