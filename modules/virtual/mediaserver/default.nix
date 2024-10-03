@@ -13,7 +13,6 @@ let
       radarrDir = config.hostConfig.dataDir + "/radarr";
       prowlarrDir = config.hostConfig.dataDir + "/prowlarr";
       sabnzbdDir = config.hostConfig.dataDir + "/sabnzbd";
-      overseerrDir = config.hostConfig.dataDir + "/overseerr";
       libraryDir = config.hostConfig.dataDir + "/library";
     };
 
@@ -201,15 +200,19 @@ in
     };
   };
 
-  #services.restic.backups = (config.lib.hostConfig.mkRestic {
-  # inherit app;
-  # paths = [ cfg.dirs.jellyfinDir ];
-  # excludePath = [
-  #  "Plex Media Server/Cache"
-  #  "Plex Media Server/Drivers"
-  #  "Plex Media Server/Plug-in Support"
-  #  "Plex Media Server/Metadata"
-  #  "Plex Media Server/Codecs"
-  # ];
-  #});
+  services.restic.backups = (config.lib.hostConfig.mkRestic {
+   inherit app;
+   paths = [ cfg.dirs.jellyfinDir cfg.dirs.jellyseerrDir cfg.dirs.radarrDir cfg.dirs.sonarrDir cfg.dirs.prowlarrDir cfg.dirs.sabnzbdDir  ];
+   excludePath = [
+    "metadata"
+    "logs"
+    "repositories"
+    "Definitions"
+    "Plex Media Server/Cache"
+    "Plex Media Server/Drivers"
+    "Plex Media Server/Plug-in Support"
+    "Plex Media Server/Metadata"
+    "Plex Media Server/Codecs"
+   ];
+  });
 }
