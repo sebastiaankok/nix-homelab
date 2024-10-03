@@ -5,6 +5,8 @@
     hostConfig = {
       dataDir = "/data";
       domainName = (import ./secrets.nix).domainName;
+      user = "sebastiaan";
+      interface = "enp0s31f6";
       system = {
         acme = {
           enable = true;
@@ -25,7 +27,6 @@
   };
 
   # Host-specific configuration options
-
   imports = [
     ./hardware-configuration.nix
   ];
