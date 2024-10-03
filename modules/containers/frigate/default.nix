@@ -85,7 +85,7 @@ in
         useACMEHost = "${domainName}";
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:${builtins.toString port}";
+          proxyPass = "https://127.0.0.1:${builtins.toString port}";
           proxyWebsockets = true;
         };
       };
