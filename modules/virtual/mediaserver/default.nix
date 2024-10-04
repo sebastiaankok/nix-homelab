@@ -187,7 +187,7 @@ in
             proxyWebsockets = true;
             extraConfig = ''
               allow 127.0.0.1;
-              allow 10.0.0.0/8;;
+              allow 10.0.0.0/8;
               deny all;               # Deny all other traffic
             '';
           };
@@ -201,7 +201,7 @@ in
             proxyWebsockets = true;
             extraConfig = ''
               allow 127.0.0.1;
-              allow 10.0.0.0/8;;
+              allow 10.0.0.0/8;
               deny all;               # Deny all other traffic
             '';
           };
@@ -215,7 +215,7 @@ in
             proxyWebsockets = true;
             extraConfig = ''
               allow 127.0.0.1;
-              allow 10.0.0.0/8;;
+              allow 10.0.0.0/8;
               deny all;               # Deny all other traffic
             '';
           };
@@ -229,7 +229,7 @@ in
             proxyWebsockets = true;
             extraConfig = ''
               allow 127.0.0.1;
-              allow 10.0.0.0/8;;
+              allow 10.0.0.0/8;
               deny all;               # Deny all other traffic
             '';
           };
@@ -243,7 +243,7 @@ in
             proxyWebsockets = true;
             extraConfig = ''
               allow 127.0.0.1;
-              allow 10.0.0.0/8;;
+              allow 10.0.0.0/8;
               deny all;               # Deny all other traffic
             '';
           };
