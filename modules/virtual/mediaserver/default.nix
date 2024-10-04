@@ -11,6 +11,7 @@ let
       jellyseerrDir = config.hostConfig.dataDir + "/jellyseerr";
       sonarrDir = config.hostConfig.dataDir + "/sonarr";
       radarrDir = config.hostConfig.dataDir + "/radarr";
+      bazarrDir = config.hostConfig.dataDir + "/bazarr";
       prowlarrDir = config.hostConfig.dataDir + "/prowlarr";
       sabnzbdDir = config.hostConfig.dataDir + "/sabnzbd";
       libraryDir = config.hostConfig.dataDir + "/library";
@@ -72,6 +73,7 @@ in
         "d ${cfg.dirs.sonarrDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.radarrDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.prowlarrDir} 0775 ${cfg.user} ${cfg.group} -"
+        "d ${cfg.dirs.bazarrDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.sabnzbdDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.jellyseerrDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.libraryDir} 0775 ${cfg.user} ${cfg.group} -"
@@ -138,6 +140,19 @@ in
         group = "${cfg.group}";
         configFile = "${cfg.dirs.sabnzbdDir}/sabnzbd.ini";
         openFirewall = false;
+      };
+
+      services.bazarr = {
+        enable = true;
+        user = "${cfg.user}";
+        group = "${cfg.group}";
+        openFirewall = false;
+      };
+
+      # Fix for bazarr that mounts the private /var/lib directory to dataDir
+      fileSystems."/var/lib/bazarr" = {
+        device = "${cfg.dirs.bazarrDir}";  # Your desired persistent data directory
+        options = ["bind"];
       };
 
       services.nginx = {
@@ -219,13 +234,27 @@ in
             '';
           };
         };
+        virtualHosts."bazarr.${cfg.domainName}" = {
+         sslCertificate = "/data/certificates/fullchain.pem";  # Path to your SSL certificate
+         sslCertificateKey = "/data/certificates/key.pem";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:6767";
+            proxyWebsockets = true;
+            extraConfig = ''
+              allow 127.0.0.1;
+              allow 10.0.0.0/8;;
+              deny all;               # Deny all other traffic
+            '';
+          };
+        };
       };
     };
   };
 
   services.restic.backups = (config.lib.hostConfig.mkRestic {
    inherit app;
-   paths = [ cfg.dirs.jellyfinDir cfg.dirs.jellyseerrDir cfg.dirs.radarrDir cfg.dirs.sonarrDir cfg.dirs.prowlarrDir cfg.dirs.sabnzbdDir  ];
+   paths = [ cfg.dirs.jellyfinDir cfg.dirs.jellyseerrDir cfg.dirs.radarrDir cfg.dirs.sonarrDir cfg.dirs.prowlarrDir cfg.dirs.bazarrDir cfg.dirs.sabnzbdDir  ];
    excludePath = [
     "metadata"
     "logs"
