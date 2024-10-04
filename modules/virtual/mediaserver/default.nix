@@ -143,6 +143,8 @@ in
       services.nginx = {
         enable = true;
         virtualHosts."jellyfin.${cfg.domainName}" = {
+        serverAliases = [ "tv.${cfg.domainName}"];
+        default = true;
     	  sslCertificate = "/data/certificates/fullchain.pem";  # Path to your SSL certificate
     	  sslCertificateKey = "/data/certificates/key.pem";
           forceSSL = true;
@@ -152,6 +154,7 @@ in
           };
         };
         virtualHosts."jellyseerr.${cfg.domainName}" = {
+        serverAliases = [ "hub.${cfg.domainName}"];
     	  sslCertificate = "/data/certificates/fullchain.pem";  # Path to your SSL certificate
     	  sslCertificateKey = "/data/certificates/key.pem";
           forceSSL = true;
@@ -167,6 +170,11 @@ in
           locations."/" = {
             proxyPass = "http://127.0.0.1:7878";
             proxyWebsockets = true;
+            extraConfig = ''
+              allow 127.0.0.1;
+              allow 10.0.0.0/8;;
+              deny all;               # Deny all other traffic
+            '';
           };
         };
         virtualHosts."sonarr.${cfg.domainName}" = {
@@ -176,6 +184,11 @@ in
           locations."/" = {
             proxyPass = "http://127.0.0.1:8989";
             proxyWebsockets = true;
+            extraConfig = ''
+              allow 127.0.0.1;
+              allow 10.0.0.0/8;;
+              deny all;               # Deny all other traffic
+            '';
           };
         };
         virtualHosts."prowlarr.${cfg.domainName}" = {
@@ -185,6 +198,11 @@ in
           locations."/" = {
             proxyPass = "http://127.0.0.1:9696";
             proxyWebsockets = true;
+            extraConfig = ''
+              allow 127.0.0.1;
+              allow 10.0.0.0/8;;
+              deny all;               # Deny all other traffic
+            '';
           };
         };
         virtualHosts."sabnzbd.${cfg.domainName}" = {
@@ -194,6 +212,11 @@ in
           locations."/" = {
             proxyPass = "http://127.0.0.1:9080";
             proxyWebsockets = true;
+            extraConfig = ''
+              allow 127.0.0.1;
+              allow 10.0.0.0/8;;
+              deny all;               # Deny all other traffic
+            '';
           };
         };
       };
@@ -208,11 +231,6 @@ in
     "logs"
     "repositories"
     "Definitions"
-    "Plex Media Server/Cache"
-    "Plex Media Server/Drivers"
-    "Plex Media Server/Plug-in Support"
-    "Plex Media Server/Metadata"
-    "Plex Media Server/Codecs"
    ];
   });
 }
