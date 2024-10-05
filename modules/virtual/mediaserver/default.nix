@@ -24,8 +24,8 @@ let
       hostname = "mediaserver";
       hypervisor = "cloud-hypervisor";
       mac = "02:22:de:ad:be:ea";
-      cpu = 2;
-      memory = 4096;
+      cpu = 3;
+      memory = 6144;
       network_mode = "private";
       interface = config.hostConfig.interface;
       user = config.hostConfig.user;
