@@ -29,7 +29,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.0
       - name: Self-hosted Renovate
+<<<<<<< HEAD
         uses: renovatebot/github-action@v40.2.10
+=======
+        uses: renovatebot/github-action@v40.3.1
+>>>>>>> bf62f578c481ee92302de25a266fb647563557f0
         with:
           configurationFile: ".github/renovate.json5"
           token: ${{ secrets.RENOVATE_TOKEN }}
