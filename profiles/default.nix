@@ -1,13 +1,25 @@
 { config, lib, pkgs, ... }:
 {
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  # Create a new user
+  users.users.root = {
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOTvwNAE0ZUIgEZRlZqw48o5Sw8gZuCPaYUPUHEp/vtg sebastiaan@linux.com"
+    ];
+  };
+
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+  powerManagement.powertop.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
