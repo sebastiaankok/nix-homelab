@@ -5,9 +5,11 @@
 keys:
   - &sebastiaankok age1v8rg97r90ahd3z0y506n9nxmkr9ug65nf9ddqfde48hzug8glpqs43t0rv
   - &dell-i5-7300u age1tp36gvk5xgx7mr2kwsvmhyg9amamwsz2su0fkx3lw2nrej6jectsktuade
+  - &b660-i5-13600 age14g2yh6vwvjgdm27rkppf005cwhr99ru0qve5mstldpn4gks0lsasz940t6
 creation_rules:
   - path_regex: .*\.sops\.yaml$
     key_groups:
     - age:
       - *sebastiaankok
       - *dell-i5-7300u
+      - *b660-i5-13600
