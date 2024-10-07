@@ -14,7 +14,6 @@
 
   };
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, sops-nix, microvm, ... }: {
-
     # NixOS configuration for temptop (temp homelab laptop)
     nixosConfigurations.dell-i5-7300U = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
@@ -35,5 +34,27 @@
         ./modules/virtual/mediaserver/default.nix
       ];
     };
+
+    # NixOS configuration for B660-i5-13600 (homelab)
+    nixosConfigurations.b660-i5-13600 = nixpkgs.lib.nixosSystem rec {
+      system = "x86_64-linux";
+
+      specialArgs = {
+        pkgs-unstable = import nixpkgs-unstable {
+          config.allowUnfree = true;
+          inherit system;
+        };
+      };
+
+      modules = [
+        sops-nix.nixosModules.sops
+        microvm.nixosModules.host
+	./hosts/b660-i5-13600
+        ./profiles
+        #./modules
+        #./modules/virtual/mediaserver/default.nix
+      ];
+    };
+
   };
 }
