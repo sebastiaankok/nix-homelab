@@ -41,7 +41,7 @@
   ];
 
   environment.shellAliases = {
-    "cat" = "bat";
+    "cat" = "bat -pp";
     "lg" = "lazygit";
   };
 
