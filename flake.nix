@@ -27,7 +27,7 @@
 
       modules = [
         sops-nix.nixosModules.sops
-	      microvm.nixosModules.host
+        microvm.nixosModules.host
         ./hosts/dell-i5-7300U
         ./profiles
         ./modules
@@ -51,8 +51,8 @@
         microvm.nixosModules.host
 	./hosts/b660-i5-13600
         ./profiles
-        #./modules
-        #./modules/virtual/mediaserver/default.nix
+        ./modules
+        ./modules/virtual/mediaserver/default.nix
       ];
     };
 
