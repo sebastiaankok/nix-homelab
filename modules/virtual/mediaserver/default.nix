@@ -56,7 +56,7 @@ in
       	gid = 990;
       };
       users.groups.acme = {
-        gid = 992;
+        gid = 994;
       };
       users.users."${cfg.user}" = {
         group = "${cfg.group}";
