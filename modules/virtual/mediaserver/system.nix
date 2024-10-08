@@ -3,10 +3,7 @@
   system.stateVersion = "24.05";
 
   # Create a new user
-  users.users."${cfg.vm.user}" = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    hashedPassword = "$y$j9T$4mHF1epbQ8m2uCgNnezmP0$B/JNxHj9mzH2i9qqBerYoMaNWqthDIGuZSB1fuUJid2";
+  users.users.root = {
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOTvwNAE0ZUIgEZRlZqw48o5Sw8gZuCPaYUPUHEp/vtg sebastiaan@linux.com"
     ];
