@@ -49,7 +49,7 @@
       modules = [
         sops-nix.nixosModules.sops
         microvm.nixosModules.host
-	./hosts/b660-i5-13600
+	      ./hosts/b660-i5-13600
         ./profiles
         ./modules
         ./modules/virtual/mediaserver/default.nix
