@@ -13,6 +13,8 @@
     settings.KbdInteractiveAuthentication = false;
   };
 
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -20,6 +22,7 @@
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   powerManagement.powertop.enable = true;
+  powerManagement.cpuFreqGovernor = "powersave";
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
