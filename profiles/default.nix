@@ -28,17 +28,39 @@
   time.timeZone = "Europe/Amsterdam";
 
   environment.systemPackages = with pkgs; [
-    vim
+    neovim
     htop
     git
+    lazygit
+    bat
     powertop
     cpufrequtils
     pciutils
-    brightnessctl
     sysz
     intel-gpu-tools
-    nh
   ];
+
+  environment.shellAliases = {
+    "cat" = "bat";
+    "lg" = "lazygit";
+  };
+
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    defaultEditor = true;
+    configure = {
+      customRC = ''
+        filetype plugin indent on
+        set expandtab
+        set tabstop=2
+        set softtabstop=2
+        set shiftwidth=2
+      '';
+    };
+  };
 
   system.stateVersion = "24.05"; # Did you read the comment?
 
