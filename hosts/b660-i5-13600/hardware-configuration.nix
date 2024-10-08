@@ -18,6 +18,16 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "b660-i5-13600";
+  networking.useDHCP = lib.mkDefault false;
+
+  systemd.network.enable = true;
+  systemd.network.networks."10-enp3s0" = {
+    matchConfig.Name = "enp3s0";
+    networkConfig = {
+      DHCP = "yes";
+      IPv6AcceptRA = false;  # Accept IPv6 router advertisements for IPv6 addresses
+    };
+  };
 
   boot.kernelParams = [ "ip=dhcp" ];
   boot.initrd = {
@@ -54,7 +64,6 @@
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
