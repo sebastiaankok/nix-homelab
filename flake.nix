@@ -53,6 +53,7 @@
         ./profiles
         ./modules
         ./modules/virtual/mediaserver/default.nix
+        ./modules/virtual/tomgardendesign-nl
       ];
     };
 
