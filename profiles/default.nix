@@ -38,6 +38,7 @@
     pciutils
     sysz
     intel-gpu-tools
+    socat
   ];
 
   environment.shellAliases = {

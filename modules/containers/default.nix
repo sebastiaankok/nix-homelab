@@ -4,5 +4,6 @@
       ./frigate
       ./home-assistant
       ./overseerr
+      ./kamstrup-mqtt
     ];
 }
