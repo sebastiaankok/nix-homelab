@@ -15,6 +15,7 @@
       services = {
         # nvr
         frigate.enable = true;
+        kamstrup-mqtt.enable = true;
         # home automation
         home-assistant.enable = true;
         zigbee2mqtt.enable = true;
