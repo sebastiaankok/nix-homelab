@@ -260,6 +260,7 @@ in
     "logs"
     "repositories"
     "Definitions"
+    "cache"
    ];
   });
 }
