@@ -13,14 +13,18 @@
         };
       };
       services = {
+        # photos
+        immich = {
+          enable = true;
+          backup = false;
+        };
         # nvr
         frigate.enable = true;
-        kamstrup-mqtt.enable = true;
         # home automation
         home-assistant.enable = true;
-        zigbee2mqtt.enable = true;
         mosquitto.enable = true;
-        mealie.enable = true;
+        zigbee2mqtt.enable = true;
+        kamstrup-mqtt.enable = true;
         # system
         prometheus.enable = true;
       };
