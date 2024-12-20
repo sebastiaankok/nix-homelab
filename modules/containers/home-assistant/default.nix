@@ -50,11 +50,11 @@ in
         "/etc/localtime:/etc/localtime:ro"
       ];
       extraOptions = [
-        "--device=/dev/ttyUSB0"
-        "--device=/dev/ttyUSB1"
-        "--device=/dev/ttyUSB2"
-        "--device=/dev/ttyUSB3"
-        "--device=/dev/serial/by-id/"
+        #"--device=/dev/ttyUSB0"
+        #"--device=/dev/ttyUSB1"
+        #"--device=/dev/ttyUSB2"
+        #"--device=/dev/ttyUSB3"
+        #"--device=/dev/serial/by-id/"
         "--network=host"
         "--privileged"
       ];
