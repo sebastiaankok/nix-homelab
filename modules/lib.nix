@@ -56,9 +56,10 @@ with lib;
       "scaleway-${options.app}" = {
         inherit pruneOpts timerConfig initialize backupPrepareCommand;
         paths = options.paths;
-        rcloneConfigFile = config.sops.secrets."rclone-config".path;
+        environmentFile = config.sops.secrets."scaleways3-config".path;
+        extraOptions = [ "s3.storage-class=GLACIER" ];
         passwordFile = config.sops.secrets."restic-repo-password".path;
-        repository = "rclone:scaleway:/backups/${options.app}";
+        repository = "s3:s3.nl-ams.scw.cloud/nixos-homelab/backups/${options.app}";
         exclude = excludePath;
       };
     }
