@@ -20,8 +20,9 @@ with lib;
       };
       pruneOpts = [
         "--keep-daily 7"
-        "--keep-weekly 4"
-        "--keep-monthly 3"
+        "--keep-weekly 1"
+        "--keep-monthly 1"
+        "--keep-yearly 0"
       ];
       initialize = true;
       backupPrepareCommand = ''
@@ -31,6 +32,15 @@ with lib;
       '';
     in
     {
+
+      # local backup
+      "local-${options.app}" = {
+        inherit pruneOpts timerConfig initialize backupPrepareCommand;
+        paths = options.paths;
+        passwordFile = config.sops.secrets."restic-repo-password".path;
+        repository = "storage/backups/${options.app}";
+        exclude = excludePath;
+      };
 
       # gdrive backup
       "gdrive-${options.app}" = {
