@@ -57,7 +57,7 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/data/library" =
+  fileSystems."/storage" =
     { device = "/dev/disk/by-uuid/ac9fa389-c1fc-4bee-8404-c0654dc2557a";
       fsType = "ext4";
     };
