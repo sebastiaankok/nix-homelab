@@ -44,6 +44,7 @@
   };
 
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/6492ebba-9a1b-497f-8afd-c173e7198a19";
+  boot.initrd.luks.devices."mediadisk".device = "/dev/disk/by-uuid/d50db245-77a4-40e3-85cc-4ca2d449bea5";
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/00bfc046-7653-4734-ada2-a4ae661f9c71";
@@ -54,6 +55,11 @@
     { device = "/dev/disk/by-uuid/F68E-B72F";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+  fileSystems."/data/library" =
+    { device = "/dev/disk/by-uuid/ac9fa389-c1fc-4bee-8404-c0654dc2557a";
+      fsType = "ext4";
     };
 
   swapDevices =
