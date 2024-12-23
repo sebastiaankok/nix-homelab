@@ -39,6 +39,7 @@
     sysz
     intel-gpu-tools
     socat
+    smartmontools
   ];
 
   environment.shellAliases = {
