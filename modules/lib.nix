@@ -38,7 +38,7 @@ with lib;
         inherit pruneOpts timerConfig initialize backupPrepareCommand;
         paths = options.paths;
         passwordFile = config.sops.secrets."restic-repo-password".path;
-        repository = "storage/backups/${options.app}";
+        repository = "/storage/backups/${options.app}";
         exclude = excludePath;
       };
 
@@ -49,6 +49,16 @@ with lib;
         rcloneConfigFile = config.sops.secrets."rclone-config".path;
         passwordFile = config.sops.secrets."restic-repo-password".path;
         repository = "rclone:gdrive:/backups/${options.app}";
+        exclude = excludePath;
+      };
+
+      # scaleway glacier backup
+      "scaleway-${options.app}" = {
+        inherit pruneOpts timerConfig initialize backupPrepareCommand;
+        paths = options.paths;
+        rcloneConfigFile = config.sops.secrets."rclone-config".path;
+        passwordFile = config.sops.secrets."restic-repo-password".path;
+        repository = "rclone:scaleway:/backups/${options.app}";
         exclude = excludePath;
       };
     }
