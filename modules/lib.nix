@@ -10,6 +10,10 @@ with lib;
     sopsFile = ./secrets.sops.yaml;
   };
 
+  sops.secrets."scaleways3-config" = {
+    sopsFile = ./secrets.sops.yaml;
+  };
+
   lib.hostConfig.mkRestic = options: (
     let
       excludePath = if builtins.hasAttr "excludePath" options then options.excludePath else [ ];
@@ -39,16 +43,6 @@ with lib;
         paths = options.paths;
         passwordFile = config.sops.secrets."restic-repo-password".path;
         repository = "/storage/backups/${options.app}";
-        exclude = excludePath;
-      };
-
-      # gdrive backup
-      "gdrive-${options.app}" = {
-        inherit pruneOpts timerConfig initialize backupPrepareCommand;
-        paths = options.paths;
-        rcloneConfigFile = config.sops.secrets."rclone-config".path;
-        passwordFile = config.sops.secrets."restic-repo-password".path;
-        repository = "rclone:gdrive:/backups/${options.app}";
         exclude = excludePath;
       };
 
