@@ -51,6 +51,10 @@ in
           proxyPass = "http://[::1]:${toString config.services.immich.port}";
           proxyWebsockets = true;
         };
+        # Allow large files to be uploaded
+        extraConfig = ''
+          client_max_body_size 10000m;
+        '';
       };
     };
 
