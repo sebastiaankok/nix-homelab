@@ -16,7 +16,6 @@
         # photos
         immich = {
           enable = true;
-          backup = false;
         };
         # nvr
         frigate.enable = true;
