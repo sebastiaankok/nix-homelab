@@ -47,6 +47,22 @@ with lib;
         ];
       };
 
+      # b2 backup
+      "b2-${options.app}" = {
+        inherit timerConfig initialize backupPrepareCommand;
+        paths = options.paths;
+        environmentFile = config.sops.secrets."b2s3-config".path;
+        passwordFile = config.sops.secrets."restic-repo-password".path;
+        repository = "s3:s3.nl-ams.scw.cloud/nixos-homelab/backups/${options.app}";
+        exclude = excludePath;
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 0"
+          "--keep-monthly 0"
+          "--keep-yearly 0"
+        ];
+      };
+
       # scaleway glacier backup
       "scaleway-${options.app}" = {
         inherit timerConfig initialize backupPrepareCommand;
