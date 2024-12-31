@@ -23,12 +23,6 @@ with lib;
         Persistent = true;
         RandomizedDelaySec = "3h";
       };
-      pruneOpts = [
-        "--keep-daily 7"
-        "--keep-weekly 1"
-        "--keep-monthly 1"
-        "--keep-yearly 0"
-      ];
       initialize = true;
       backupPrepareCommand = ''
         # remove stale locks - this avoids some occasional annoyance
@@ -40,22 +34,29 @@ with lib;
 
       # local backup
       "local-${options.app}" = {
-        inherit pruneOpts timerConfig initialize backupPrepareCommand;
+        inherit timerConfig initialize backupPrepareCommand;
         paths = options.paths;
         passwordFile = config.sops.secrets."restic-repo-password".path;
         repository = "/storage/backups/${options.app}";
         exclude = excludePath;
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 1"
+          "--keep-monthly 1"
+          "--keep-yearly 1"
+        ];
       };
 
       # scaleway glacier backup
       "scaleway-${options.app}" = {
-        inherit pruneOpts timerConfig initialize backupPrepareCommand;
+        inherit timerConfig initialize backupPrepareCommand;
         paths = options.paths;
         environmentFile = config.sops.secrets."scaleways3-config".path;
         extraOptions = [ "s3.storage-class=GLACIER" ];
         passwordFile = config.sops.secrets."restic-repo-password".path;
         repository = "s3:s3.nl-ams.scw.cloud/nixos-homelab/backups/${options.app}";
         exclude = excludePath ++ excludeGlacier;
+        pruneOpts = [];
       };
     }
   );
