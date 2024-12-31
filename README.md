@@ -38,6 +38,9 @@ nixos-rebuild switch --flake . # This will automatically pick the configuration 
 
 ## Restoring backups
 
+### Local
+- `restic -r /storage/backups/<app> restore --target <path> latest`
+
 ### Backblaze B2
 - `restic -r s3:s3.eu-central-003.backblazeb2.com/nixos-homelab/backups/<app> restore --target <path> latest`
 
