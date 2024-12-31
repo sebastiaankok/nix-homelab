@@ -80,6 +80,7 @@ in
      inherit app appData;
      paths = [ appData ];
      #excludePath = [ "./example"];
+     excludeGlacier = [ "backups" "home-assistant_v2.db-shm" "home-assistant_v2.db-wal" "home-assistant_v2.db" "home-assistant.log" "home-assistant.log.fault" "home-assistant.log.1"];
     });
 
   };
