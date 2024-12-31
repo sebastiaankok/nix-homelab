@@ -17,6 +17,7 @@ with lib;
   lib.hostConfig.mkRestic = options: (
     let
       excludePath = if builtins.hasAttr "excludePath" options then options.excludePath else [ ];
+      excludeGlacier = if builtins.hasAttr "excludeGlacier" options then options.excludeGlacier else [ ];
       timerConfig = {
         OnCalendar = "02:15";
         Persistent = true;
@@ -54,7 +55,7 @@ with lib;
         extraOptions = [ "s3.storage-class=GLACIER" ];
         passwordFile = config.sops.secrets."restic-repo-password".path;
         repository = "s3:s3.nl-ams.scw.cloud/nixos-homelab/backups/${options.app}";
-        exclude = excludePath;
+        exclude = excludePath ++ excludeGlacier;
       };
     }
   );
