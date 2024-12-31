@@ -61,7 +61,7 @@ in
     services.restic.backups = mkIf cfg.backup (config.lib.hostConfig.mkRestic {
      inherit app appData;
      paths = [ appData ];
-     excludePath = [ "repositories" "logs"];
+     #excludePath = [ "repositories" "logs"];
     });
   };
 }
