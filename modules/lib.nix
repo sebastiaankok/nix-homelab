@@ -14,6 +14,10 @@ with lib;
     sopsFile = ./secrets.sops.yaml;
   };
 
+  sops.secrets."b2s3-config" = {
+    sopsFile = ./secrets.sops.yaml;
+  };
+
   lib.hostConfig.mkRestic = options: (
     let
       excludePath = if builtins.hasAttr "excludePath" options then options.excludePath else [ ];
@@ -53,7 +57,7 @@ with lib;
         paths = options.paths;
         environmentFile = config.sops.secrets."b2s3-config".path;
         passwordFile = config.sops.secrets."restic-repo-password".path;
-        repository = "s3:s3.nl-ams.scw.cloud/nixos-homelab/backups/${options.app}";
+        repository = "s3:s3.eu-central-003.backblazeb2.com/nixos-homelab/backups/${options.app}";
         exclude = excludePath;
         pruneOpts = [
           "--keep-daily 7"
