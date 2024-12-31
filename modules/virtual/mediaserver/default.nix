@@ -257,10 +257,12 @@ in
    paths = [ cfg.dirs.jellyfinDir cfg.dirs.jellyseerrDir cfg.dirs.radarrDir cfg.dirs.sonarrDir cfg.dirs.prowlarrDir cfg.dirs.bazarrDir cfg.dirs.sabnzbdDir  ];
    excludePath = [
     "metadata"
+    "data"
     "logs"
     "repositories"
     "Definitions"
     "cache"
+    "MediaCover"
    ];
   });
 }
