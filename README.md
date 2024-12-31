@@ -37,7 +37,14 @@ nixos-rebuild switch --flake . # This will automatically pick the configuration 
 
 
 ## Restoring backups
-`restic -r rclone:gdrive:/backups/<app> restore <latest> --target <path>`
+
+### Backblaze B2
+- `restic -r s3:s3.eu-central-003.backblazeb2.com/nixos-homelab/backups/<app> restore --target <path> latest`
+
+### Scaleway Glacier
+[Scaleway glacier restore](https://www.scaleway.com/en/docs/storage/object/how-to/restore-an-object-from-glacier/)
+- `restic -r s3:s3.nl-ams.scw.cloud/nixos-homelab/backups/<app> restore --target <path> latest`
+
 
 ## Links & References
 
