@@ -61,9 +61,9 @@ with lib;
         exclude = excludePath;
         pruneOpts = [
           "--keep-daily 7"
-          "--keep-weekly 0"
-          "--keep-monthly 0"
-          "--keep-yearly 0"
+          "--keep-weekly 1"
+          "--keep-monthly 1"
+          "--keep-yearly 1"
         ];
       };
 
