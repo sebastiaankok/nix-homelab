@@ -40,6 +40,8 @@
     intel-gpu-tools
     socat
     smartmontools
+    restic
+    sops
   ];
 
   environment.shellAliases = {
