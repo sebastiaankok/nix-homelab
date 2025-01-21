@@ -3,7 +3,7 @@ with lib;
 
 let
   app = "home-assistant";
-  image = "ghcr.io/home-assistant/home-assistant:2025.1.2";
+  image = "ghcr.io/home-assistant/home-assistant:2025.1.3";
   cfg = config.hostConfig.services.${app};
   appData = config.hostConfig.dataDir + "/${app}";
   domainName = config.hostConfig.domainName;
