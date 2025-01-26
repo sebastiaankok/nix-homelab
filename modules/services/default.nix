@@ -10,6 +10,6 @@
     ./prowlarr
     ./sabnzbd
     ./mosquitto
-    ./zigbee2mqtt
+#    ./zigbee2mqtt
   ];
 }
