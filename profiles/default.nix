@@ -42,6 +42,7 @@
     smartmontools
     restic
     sops
+    renovate
   ];
 
   environment.shellAliases = {
