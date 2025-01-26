@@ -9,8 +9,8 @@ let
   domainName = config.hostConfig.domainName;
   user = "${app}";
   group = "${app}";
-  uid = 317;
-  gid = 317;
+  uid = 1004;
+  gid = 1004;
   port = 8080;
 in
 {
