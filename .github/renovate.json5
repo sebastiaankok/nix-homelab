@@ -1,7 +1,6 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   ignorePaths: ["^archive/**"],
-  repositories: ["sebastiaankok/nix-homelab"],
   prHourlyLimit: 10,
   extends: ["mergeConfidence:all-badges"],
 
@@ -12,7 +11,7 @@
   "lockFileMaintenance": {
     "enabled": "true",
     "automerge": "false",
-    "schedule": ["before 4am on monday"],
+    "schedule": ["after 10pm every weekday", "before 5am every weekday", "every weekend"]
   },
 
   "regexManagers": [{
