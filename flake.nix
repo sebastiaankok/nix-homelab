@@ -5,8 +5,7 @@
   inputs = {
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    mediaserver.url = "github:nixos/nixpkgs/nixos-unstable";
-    immich.url = "github:NixOS/nixpkgs/nixos-24.11";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Secret management
     sops-nix.url = "github:Mic92/sops-nix";
     # MicroVM
@@ -14,14 +13,14 @@
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
   };
-  outputs = inputs@{ self, nixpkgs, mediaserver, immich, sops-nix, microvm, ... }: {
+  outputs = inputs@{ self, nixpkgs, unstable, sops-nix, microvm, ... }: {
 
     # NixOS configuration for B660-i5-13600 (homelab)
     nixosConfigurations.b660-i5-13600 = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
 
       specialArgs = {
-        pkgs-mediaserver = import mediaserver {
+        pkgs-unstable = import unstable {
           config.allowUnfree = true;
           config.permittedInsecurePackages = [
               "dotnet-runtime-wrapped-6.0.36"
@@ -30,10 +29,6 @@
               "dotnet-sdk-6.0.428"
               "dotnet-sdk-wrapped-6.0.428"
           ];
-          inherit system;
-        };
-        pkgs-immich = import immich {
-          config.allowUnfree = true;
           inherit system;
         };
       };
