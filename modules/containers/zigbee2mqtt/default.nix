@@ -50,7 +50,9 @@ in
         "${appData}:/app/data:rw"
         "/etc/localtime:/etc/localtime:ro"
       ];
-      ports = [ "127.0.0.1:8080:8080" ]; # expose port
+      extraOptions = [
+        "--network=host"
+      ];
     };
 
     services.nginx = {
