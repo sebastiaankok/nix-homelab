@@ -101,34 +101,11 @@ in
         serviceConfig = {
           User = cfg.user;
           Group = cfg.group;
-          #Type = "exec";
-          #StateDirectory = "jellyseerr";
           DynamicUser = lib.mkForce false;
-          #ProtectSystem = lib.mkForce "no";
-          #Restart = "on-failure";
-          #ProtectHome = lib.mkForce false;
           ReadWritePaths= "${cfg.dirs.jellyseerrDir}";
-          #PrivateTmp = lib.mkForce false;
-          #PrivateDevices = lib.mkForce false;
-          #RemoveIPC = lib.mkForce false;
-          #PrivateMounts = lib.mkForce false;
         };
 
       };
-
-      # Fix for jellyseerr that forces dataDir
-      # systemd.services.jellyseerr.serviceConfig.BindPaths = lib.mkForce [
-      #   "${cfg.dirs.jellyseerrDir}/:${pkgs-mediaserver.jellyseerr}/libexec/jellyseerr/deps/jellyseerr/config/"
-      # ];
-      #systemd.services.jellyseerr.serviceConfig.ReadWritePaths = [ "${cfg.dirs.jellyseerrDir}" ];
-      #systemd.services.jellyseerr.serviceConfig.Group = "${cfg.group}";
-
-      ## Fix for prowlarr that mounts the private /var/lib directory to dataDir
-      #fileSystems."/var/lib/jellyseerr" = {
-      #  device = "${cfg.dirs.jellyseerrDir}";  # Your desired persistent data directory
-      #  options = ["bind"];
-      #};
-
 
       services.radarr = {
         package = pkgs-unstable.radarr;
