@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, lib, inputs, self, config, ... }:
+{ pkgs, pkgs-mediaserver, lib, inputs, self, config, ... }:
 with lib;
 
 let
@@ -24,8 +24,8 @@ let
       hostname = "mediaserver";
       hypervisor = "cloud-hypervisor";
       mac = "02:22:de:ad:be:ea";
-      cpu = 3;
-      memory = 6144;
+      cpu = 6;
+      memory = 8196;
       network_mode = "private";
       interface = config.hostConfig.interface;
       user = config.hostConfig.user;
@@ -37,6 +37,8 @@ in
 {
   microvm.vms."${cfg.vm.hostname}" = {
     autostart = true;
+
+    pkgs = pkgs-mediaserver;
 
     config = {
 
@@ -80,7 +82,7 @@ in
       ];
 
       services.jellyfin = {
-        package = pkgs-unstable.jellyfin;
+        package = pkgs-mediaserver.jellyfin;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
@@ -89,20 +91,47 @@ in
       };
 
       services.jellyseerr = {
+        package = pkgs-mediaserver.jellyseerr;
         enable = true;
         openFirewall = false;
+        configDir = "${cfg.dirs.jellyseerrDir}";
+      };
+
+      systemd.services.jellyseerr = {
+        serviceConfig = {
+          User = cfg.user;
+          Group = cfg.group;
+          #Type = "exec";
+          #StateDirectory = "jellyseerr";
+          DynamicUser = lib.mkForce false;
+          #ProtectSystem = lib.mkForce "no";
+          #Restart = "on-failure";
+          #ProtectHome = lib.mkForce false;
+          ReadWritePaths= "${cfg.dirs.jellyseerrDir}";
+          #PrivateTmp = lib.mkForce false;
+          #PrivateDevices = lib.mkForce false;
+          #RemoveIPC = lib.mkForce false;
+          #PrivateMounts = lib.mkForce false;
+        };
+
       };
 
       # Fix for jellyseerr that forces dataDir
-      systemd.services.jellyseerr.serviceConfig.BindPaths = lib.mkForce [
-        "${cfg.dirs.jellyseerrDir}/:${pkgs.jellyseerr}/libexec/jellyseerr/deps/jellyseerr/config/"
-      ];
-      systemd.services.jellyseerr.serviceConfig.ReadWritePaths = [ "${cfg.dirs.jellyseerrDir}" ];
-      systemd.services.jellyseerr.serviceConfig.Group = "${cfg.group}";
+      # systemd.services.jellyseerr.serviceConfig.BindPaths = lib.mkForce [
+      #   "${cfg.dirs.jellyseerrDir}/:${pkgs-mediaserver.jellyseerr}/libexec/jellyseerr/deps/jellyseerr/config/"
+      # ];
+      #systemd.services.jellyseerr.serviceConfig.ReadWritePaths = [ "${cfg.dirs.jellyseerrDir}" ];
+      #systemd.services.jellyseerr.serviceConfig.Group = "${cfg.group}";
+
+      ## Fix for prowlarr that mounts the private /var/lib directory to dataDir
+      #fileSystems."/var/lib/jellyseerr" = {
+      #  device = "${cfg.dirs.jellyseerrDir}";  # Your desired persistent data directory
+      #  options = ["bind"];
+      #};
 
 
       services.radarr = {
-        package = pkgs-unstable.radarr;
+        package = pkgs-mediaserver.radarr;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
@@ -111,7 +140,7 @@ in
       };
 
       services.sonarr = {
-        package = pkgs-unstable.sonarr;
+        package = pkgs-mediaserver.sonarr;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
@@ -120,7 +149,7 @@ in
       };
 
       services.prowlarr = {
-        package = pkgs-unstable.prowlarr;
+        package = pkgs-mediaserver.prowlarr;
         enable = true;
         openFirewall = false;
       };
@@ -134,7 +163,7 @@ in
       };
 
       services.sabnzbd = {
-        package = pkgs-unstable.sabnzbd;
+        package = pkgs-mediaserver.sabnzbd;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
@@ -143,6 +172,7 @@ in
       };
 
       services.bazarr = {
+        package = pkgs-mediaserver.bazarr;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
