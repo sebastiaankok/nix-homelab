@@ -1,4 +1,4 @@
-{ pkgs, pkgs-mediaserver, lib, inputs, self, config, ... }:
+{ pkgs, pkgs-unstable, lib, inputs, self, config, ... }:
 with lib;
 
 let
@@ -38,7 +38,7 @@ in
   microvm.vms."${cfg.vm.hostname}" = {
     autostart = true;
 
-    pkgs = pkgs-mediaserver;
+    pkgs = pkgs-unstable;
 
     config = {
 
@@ -82,7 +82,7 @@ in
       ];
 
       services.jellyfin = {
-        package = pkgs-mediaserver.jellyfin;
+        package = pkgs-unstable.jellyfin;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
@@ -91,7 +91,7 @@ in
       };
 
       services.jellyseerr = {
-        package = pkgs-mediaserver.jellyseerr;
+        package = pkgs-unstable.jellyseerr;
         enable = true;
         openFirewall = false;
         configDir = "${cfg.dirs.jellyseerrDir}";
@@ -131,7 +131,7 @@ in
 
 
       services.radarr = {
-        package = pkgs-mediaserver.radarr;
+        package = pkgs-unstable.radarr;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
@@ -140,7 +140,7 @@ in
       };
 
       services.sonarr = {
-        package = pkgs-mediaserver.sonarr;
+        package = pkgs-unstable.sonarr;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
@@ -149,7 +149,7 @@ in
       };
 
       services.prowlarr = {
-        package = pkgs-mediaserver.prowlarr;
+        package = pkgs-unstable.prowlarr;
         enable = true;
         openFirewall = false;
       };
@@ -163,7 +163,7 @@ in
       };
 
       services.sabnzbd = {
-        package = pkgs-mediaserver.sabnzbd;
+        package = pkgs-unstable.sabnzbd;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
@@ -172,7 +172,7 @@ in
       };
 
       services.bazarr = {
-        package = pkgs-mediaserver.bazarr;
+        package = pkgs-unstable.bazarr;
         enable = true;
         user = "${cfg.user}";
         group = "${cfg.group}";
