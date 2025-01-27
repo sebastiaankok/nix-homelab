@@ -48,8 +48,8 @@
   environment.shellAliases = {
     "cat" = "bat -pp";
     "lg" = "lazygit";
+    "up" = "nixos-rebuild switch --flake path:/root/nix-config --show-trace";
   };
-
 
   programs.neovim = {
     enable = true;
