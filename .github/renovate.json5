@@ -1,25 +1,44 @@
 {
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  ignorePaths: ["^archive/**"],
-  prHourlyLimit: 10,
-  repositories: ["sebastiaankok/nix-homelab"],
-  extends: ["mergeConfidence:all-badges"],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "ignorePaths": ["^archive/**"],
+  "prHourlyLimit": 10,
+  "repositories": ["sebastiaankok/nix-homelab"],
+  "extends": ["mergeConfidence:all-badges"],
 
+  // Enable Nix functionality
   "nix": {
-    "enabled": "true",
+    "enabled": true
   },
 
+  // Maintain lock file for Nix flakes
   "lockFileMaintenance": {
-    "enabled": "true",
-    "automerge": "false",
+    "enabled": true,
+    "automerge": false,
     "schedule": ["after 10pm every weekday", "before 5am every weekday", "every weekend"]
   },
 
-  "regexManagers": [{
-    fileMatch: ["^modules/containers/.*\\.nix$"],
-    matchStrings: [
-      'image *= *"(?<depName>.*?):(?<currentValue>.*?)(@(?<currentDigest>sha256:[a-f0-9]+))?"',
-    ],
-    datasourceTemplate: "docker",
-  }],
+  // Regex manager for Docker image updates
+  "regexManagers": [
+    {
+      "fileMatch": ["^modules/containers/.*\\.nix$"], // Match Docker-related Nix modules
+      "matchStrings": [
+        'image *= *"(?<depName>.*?):(?<currentValue>.*?)(@(?<currentDigest>sha256:[a-f0-9]+))?"'
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      // Match GitHub dependencies for Nix inputs (separate PRs per input)
+      "fileMatch": ["flake\\.nix$"], // Match flake.nix
+      "matchStrings": [
+        'github:(?<depName>[^/]+/[^@]+)(?<currentValue>@[^\\s"]+)?'
+      ],
+      "datasourceTemplate": "github-tags"
+    }
+  ],
+
+  // Additional configuration for Docker updates
+  "docker": {
+    "enabled": true,
+    "pinDigests": true // Ensures Docker images are pinned with digests
+  }
 }
