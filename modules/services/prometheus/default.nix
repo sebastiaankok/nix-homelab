@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -32,7 +32,6 @@ in
     };
 
     services.${app} = {
-      package = pkgs-unstable.${app};
       enable = true;
       checkConfig = "syntax-only";
       enableReload = true;
