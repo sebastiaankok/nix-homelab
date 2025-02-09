@@ -68,6 +68,9 @@ in
         "/var/run/secrets/services/kamstrup-mqtt/config:/opt/kamstrup/config.yaml:ro"
         "/dev/ser2net/kamstrup-serial:/dev/ser2net/kamstrup-serial"
       ];
+      extraOptions = [
+        "--network=host"
+      ];
     };
   };
 }
