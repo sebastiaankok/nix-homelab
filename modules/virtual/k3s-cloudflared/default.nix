@@ -2,21 +2,20 @@
 with lib;
 
 let
-  app = "tomgardendesign-nl";
+  app = "k3s-cloudflared";
 
   cfg = {
-    domainName = "tomgardendesign.nl";
     dirs = {
-      contentDir = config.hostConfig.dataDir + "/wordpress/tomgardendesign-nl";
+      contentDir = config.hostConfig.dataDir + "/k3s-cloudflared";
     };
 
-    user = "tomgardendesign-nl";
-    group = "tomgardendesign-nl";
+    user = "k3s-cloudflared";
+    group = "k3s-cloudflared";
     uid = 2000;
     gid = 2000;
 
     vm = {
-      hostname = "tomgardendesign";
+      hostname = "k3s-cloudflared";
       hypervisor = "cloud-hypervisor";
       mac = "12:22:de:ad:be:ea";
       cpu = 2;
@@ -43,30 +42,25 @@ in
         (import ./system.nix { inherit cfg; })
       ];
 
-      services.cloudflared = {
+      services.k3s = {
         enable = true;
+        role = "server";
+
+        extraFlags = [
+          #"--disable servicelb" 
+          "--disable traefik"
+          "--disable local-storage"
+          "--disable metrics-server"
+          "--disable-network-policy"
+        ]
       };
 
-      environment.systemPackages = with pkgs; [
-        cloudflared 
-      ];
-
-      #networking = {
-      #  firewall.allowedTCPPorts = [ 443 ];
-      #};
-
-      users.groups."${cfg.group}" = {
-      	gid = cfg.gid;
+      networking = {
+        firewall.allowedTCPPorts = [ 
+          443 
+          6443
+        ];
       };
-      users.users."${cfg.user}" = {
-        group = "${cfg.group}";
-        isSystemUser = true;
-        uid = cfg.uid;
-      };
-
-      systemd.tmpfiles.rules = [
-        "d ${cfg.dirs.contentDir} 0750 ${cfg.user} ${cfg.group} -"
-      ];
 
     };
   };

@@ -26,7 +26,7 @@
     {
       source = "${cfg.dirs.contentDir}";
       mountPoint = "/data";
-      tag = "wp-content";
+      tag = "k3s-cloudflared";
       proto = "virtiofs";
     }
   ];
