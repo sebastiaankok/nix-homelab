@@ -52,7 +52,7 @@ in
           "--disable local-storage"
           "--disable metrics-server"
           "--disable-network-policy"
-        ]
+        ];
       };
 
       networking = {
