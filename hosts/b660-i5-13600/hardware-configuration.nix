@@ -29,7 +29,7 @@
     };
   };
 
-  boot.kernelParams = [ "ip=dhcp" ];
+  boot.kernelParams = [ "ip=dhcp" "i915.enable_gvt=1" ];
   boot.initrd = {
     systemd.users.root.shell = "/bin/cryptsetup-askpass";
     network = {
