@@ -56,6 +56,12 @@ in
       ];
     };
 
+    networking = {
+      firewall.allowedTCPPorts = [
+        1883
+      ];
+    };
+
     services.restic.backups = mkIf cfg.backup (config.lib.hostConfig.mkRestic {
      inherit app appData;
      paths = [ appData ];
