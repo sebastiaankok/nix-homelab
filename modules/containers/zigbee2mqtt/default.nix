@@ -3,7 +3,7 @@ with lib;
 
 let
   app = "zigbee2mqtt";
-  image = "koenkk/zigbee2mqtt:2.1.1";
+  image = "koenkk/zigbee2mqtt:2.1.3";
   cfg = config.hostConfig.services.${app};
   appData = config.hostConfig.dataDir + "/${app}";
   domainName = config.hostConfig.domainName;
