@@ -20,6 +20,17 @@
   networking.hostName = "b660-i5-13600";
   networking.useDHCP = lib.mkDefault false;
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-vaapi-driver
+      vaapiVdpau
+      intel-compute-runtime
+      vpl-gpu-rt
+    ];
+  };
+
   systemd.network.enable = true;
   systemd.network.networks."10-enp3s0" = {
     matchConfig.Name = "enp3s0";
