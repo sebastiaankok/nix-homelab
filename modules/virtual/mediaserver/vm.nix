@@ -12,6 +12,9 @@ let
 in
 {
   hypervisor = cfg.vm.hypervisor;
+  qemu.extraArgs = [
+    "-device" "virtio-gpu-pci"
+  ];
   vcpu = cfg.vm.cpu;
   mem = cfg.vm.memory;
   interfaces = [
@@ -25,12 +28,6 @@ in
       };
     }
   ];
-  #devices = [
-  #  {
-  #    bus = "pci";
-  #    path = "0000:00:02.0";
-  #  }
-  #];
 
   shares = [
     {
@@ -39,12 +36,6 @@ in
       tag = "ro-store";
       proto = "virtiofs";
     }
-    #{
-    #  tag = "dri";
-    #  source = "/dev/dri";
-    #  mountPoint = "/dev/dri";
-    #  proto = "9p"; # or "9p" if virtiofs is not supported
-    #}
     {
       source = "/var/lib/acme/${cfg.domainName}";
       mountPoint = "/data/certificates";
