@@ -2,6 +2,7 @@
 with lib;
 
 let
+
   app = "mediaserver";
 
   cfg = {
@@ -22,10 +23,10 @@ let
 
     vm = {
       hostname = "mediaserver";
-      hypervisor = "cloud-hypervisor";
+      hypervisor = "qemu" ;
       mac = "02:22:de:ad:be:ea";
       cpu = 6;
-      memory = 8196;
+      memory = 16392;
       network_mode = "private";
       interface = config.hostConfig.interface;
       user = config.hostConfig.user;
@@ -41,6 +42,24 @@ in
     pkgs = pkgs-unstable;
 
     config = {
+
+      hardware.graphics = {
+        enable = true;
+        extraPackages = with pkgs; [
+          intel-media-driver
+          intel-vaapi-driver
+          vaapiVdpau
+          intel-compute-runtime
+          vpl-gpu-rt
+        ];
+      };
+
+      fileSystems."/" = {
+        device = "rootfs";
+        fsType = "tmpfs";
+        options = [ "size=80%,mode=0755" ];
+        neededForBoot = true;
+      };
 
       # Import VM configuration interface, disks
       microvm = import ./vm.nix { cfg = cfg; lib = lib; };
@@ -89,6 +108,7 @@ in
         dataDir = "${cfg.dirs.jellyfinDir}";
         openFirewall = false;
       };
+
 
       services.jellyseerr = {
         package = pkgs-unstable.jellyseerr;
