@@ -13,6 +13,19 @@
         action = ":lua vim.lsp.buf.code_action()<CR>";
         options.silent = false;
       }
+      {
+        mode = "v"; # Visual mode
+        key = "<Tab>";
+        action = ">gv";
+        options.silent = true;
+      }
+      # Indent selection to the left with Shift+Tab
+      {
+        mode = "v"; # Visual mode
+        key = "<S-Tab>";
+        action = "<gv";
+        options.silent = true;
+      }
     ];
     enable = true;
     defaultEditor = true;
