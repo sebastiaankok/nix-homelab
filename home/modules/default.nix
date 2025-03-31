@@ -5,9 +5,8 @@
     ./shell/zsh
     ./shell/atuin
     ./shell/kubeswitch
-    ./shell/ghostty
+    ./gui/ghostty
   ];
-
 
   # Home-manager defaults
   home.stateVersion = "24.11";
@@ -49,7 +48,7 @@
     black
     isort
     djlint
-    nixfmt
+    nixfmt-classic
     prettierd
     shellcheck
     stylua
