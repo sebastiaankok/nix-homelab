@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   imports = [
     ./editor/neovim
     ./shell/zsh
@@ -15,7 +14,6 @@
   home.username = "sebastiaan";
   home.homeDirectory = "/home/sebastiaan";
 
-
   programs = {
     home-manager.enable = true;
     nixvim.enable = true;
@@ -28,13 +26,16 @@
     extraConfig = {
       color = { ui = true; };
       core = { pager = "diff-so-fancy | less --tabs=4 -RF"; };
-      interactive = {diffFilter = "diff-so-fancy --patch"; };
+      interactive = { diffFilter = "diff-so-fancy --patch"; };
     };
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
   };
+
+  nixpkgs.config = { allowUnfree = true; };
 
   home.packages = with pkgs; [
     # languages
@@ -92,7 +93,6 @@
     kubectl
     kubecolor
     krew
-
 
   ];
 
