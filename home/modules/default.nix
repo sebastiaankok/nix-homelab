@@ -3,6 +3,7 @@
   imports = [
     ./editor/neovim
     ./shell/zsh
+    ./shell/bat
     ./shell/atuin
     ./shell/kubeswitch
     ./gui/ghostty
@@ -69,7 +70,6 @@
     btop
     nh
     sops
-    bat
 
     # network
     nmap
