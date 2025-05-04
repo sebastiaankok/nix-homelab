@@ -64,6 +64,7 @@
         modules = [
           sops-nix.nixosModules.sops
           ./hosts/dell-i5-7300U
+          ./profiles/workstation.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
