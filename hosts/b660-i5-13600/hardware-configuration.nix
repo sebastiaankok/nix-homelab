@@ -41,6 +41,7 @@
   };
 
   boot.kernelParams = [ "ip=dhcp" "i915.enable_gvt=1" ];
+  boot.kernel.sysctl = { "vm.swappiness" = 10;};
   boot.initrd = {
     systemd.users.root.shell = "/bin/cryptsetup-askpass";
     network = {
