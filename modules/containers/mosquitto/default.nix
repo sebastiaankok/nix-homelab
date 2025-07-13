@@ -3,7 +3,7 @@ with lib;
 
 let
   app = "mosquitto";
-  image = "public.ecr.aws/docker/library/eclipse-mosquitto:2.0.21";
+  image = "public.ecr.aws/docker/library/eclipse-mosquitto:2.0.22";
   cfg = config.hostConfig.services.${app};
   appData = config.hostConfig.dataDir + "/${app}";
   domainName = config.hostConfig.domainName;
