@@ -23,6 +23,7 @@
         };
 
         servers = {
+          ansiblels.enable = true;
           bashls.enable = true;
           cmake.enable = true;
           dockerls.enable = true;
