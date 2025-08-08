@@ -1,7 +1,7 @@
 {
   programs.nixvim = {
     plugins = {
-      colorizer = {
+      nvim-colorizer = {
         enable = true;
       };
     };

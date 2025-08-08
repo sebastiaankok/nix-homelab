@@ -7,11 +7,10 @@
     python3
     python311Packages.pip
     pipx
-    pre-commit
     virtualenv
     go
 
-    # language utils
+    ## language utils
     black
     isort
     djlint
@@ -21,11 +20,16 @@
     stylua
     taplo
     yamlfmt
+    ansible-lint
 
     # system tools
-    yq
+    bash
+    findutils
+    yq-go
     jq
     coreutils-full
+    gnugrep
+    gnused
     tree
     nettools
     vivid
@@ -36,29 +40,38 @@
     btop
     nh
     sops
-    obsidian
+    watch
 
     # network
     nmap
 
-    # containers
-    docker-client
-    colima
-
     # databases
     postgresql
+    minio-client
+    kafkactl
 
-    # ci tools
+    ## containers
+    docker-client
+    podman
+    colima
+
+    ## ci tools
     gitleaks
     rclone
     restic
     ssh-to-age
 
-    # k8s
+    ## k8s
     k9s
     kubectl
     kubecolor
     krew
+    stern
+    cilium-cli
+    kubernetes-helm
+    argocd
 
+    ## gui
+    cyberduck
   ];
 }

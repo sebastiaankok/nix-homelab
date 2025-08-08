@@ -26,8 +26,28 @@
         action = "<gv";
         options.silent = true;
       }
+      # Copy to clipboard with visual + a
+      {
+        mode = "v";
+        key = "a";
+        action = ":w !pbcopy<CR>";
+        options.silent = true;
+      }
+      # Switch window with TAB instead of ctrl+w
+      {
+        mode = "n";
+        key = "<Tab>";
+        action = "<C-w>w";
+        options.silent = true;
+      }
+      # Switch window with shift + TAB instead of shift+ctrl+w
+      {
+        mode = "n";
+        key = "<S-Tab>";
+        action = "<C-w>W";
+        options.silent = true;
+      }
     ];
-    enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
@@ -51,6 +71,9 @@
     luaLoader.enable = true;
 
     opts = {
+      splitbelow = true;
+      splitright = true;
+
       number = true; # Show line numbers
       updatetime = 100; # Faster completion
       tabstop =
@@ -94,10 +117,10 @@
     ./plugins/efm.nix
     ./plugins/gitblame.nix
     ./plugins/lualine.nix
-    ./plugins/copilot.nix
     ./plugins/conform.nix
     ./plugins/trouble.nix
     ./plugins/markview.nix
+    ./plugins/avante.nix
   ];
 
 }
