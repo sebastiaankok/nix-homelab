@@ -4,6 +4,18 @@
   hypervisor = cfg.vm.hypervisor;
   vcpu = cfg.vm.cpu;
   mem = cfg.vm.memory;
+  volumes = [
+    {
+      mountPoint = "/var/lib/rancher";
+      image = "var-k3s.img";
+      size = 10 * 1024;
+    }
+    {
+      mountPoint = "/etc/rancher";
+      image = "etc-k3s.img";
+      size = 1024;
+    }
+  ];
   interfaces = [
     {
       id = "${cfg.vm.hostname}";

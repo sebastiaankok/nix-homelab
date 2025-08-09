@@ -51,7 +51,7 @@
           ./profiles
           ./modules
           ./modules/virtual/mediaserver/default.nix
-          # ./modules/virtual/k3s-cloudflared
+          ./modules/virtual/k3s-cloudflared
         ];
       };
 
