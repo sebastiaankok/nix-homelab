@@ -18,8 +18,8 @@ let
       hostname = "k3s-cloudflared";
       hypervisor = "cloud-hypervisor";
       mac = "12:22:de:ad:be:ea";
-      cpu = 2;
-      memory = 2048;
+      cpu = 8;
+      memory = 4096;
       network_mode = "private";
       interface = config.hostConfig.interface;
       user = config.hostConfig.user;
@@ -50,7 +50,7 @@ in
           #"--disable servicelb" 
           "--disable traefik"
           "--disable local-storage"
-          "--disable metrics-server"
+          #"--disable metrics-server"
           "--disable-network-policy"
         ];
       };
@@ -59,6 +59,7 @@ in
         firewall.allowedTCPPorts = [ 
           443 
           6443
+          10250
         ];
       };
 
