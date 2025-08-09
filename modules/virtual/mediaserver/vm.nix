@@ -1,15 +1,15 @@
 { cfg, lib, ... }:
 with lib;
 
-let
-  # Define a helper function to convert each directory into a share configuration
-  toShare = dir: {
-    source = dir;
-    mountPoint = dir;
-    tag = lib.strings.toLower (lib.last (lib.strings.splitString "/" dir));
-    proto = "virtiofs";
-  };
-in
+#let
+#  # Define a helper function to convert each directory into a share configuration
+#  toShare = dir: {
+#    source = dir;
+#    mountPoint = dir;
+#    tag = lib.strings.toLower (lib.last (lib.strings.splitString "/" dir));
+#    proto = "virtiofs";
+#  };
+#in
 {
   hypervisor = cfg.vm.hypervisor;
   qemu.extraArgs = [
@@ -42,5 +42,17 @@ in
       tag = "certificate";
       proto = "virtiofs";
     }
-  ] ++ (map toShare (builtins.attrValues cfg.dirs)); # Dynamically add shares from cfg.dirs
+    {
+      tag = "mediaserver";
+      source = "/data/mediaserver";
+      mountPoint = "/data/mediaserver";
+      proto = "virtiofs";
+    }
+    {
+      tag = "library";
+      source = "/data/library";
+      mountPoint = "/data/library";
+      proto = "virtiofs";
+    }
+  ];# ++ (map toShare (builtins.attrValues cfg.dirs)); # Dynamically add shares from cfg.dirs
 }
