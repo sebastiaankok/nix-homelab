@@ -8,13 +8,14 @@ let
   cfg = {
     domainName = config.hostConfig.domainName;
     dirs = {
-      jellyfinDir = config.hostConfig.dataDir + "/jellyfin";
-      jellyseerrDir = config.hostConfig.dataDir + "/jellyseerr";
-      sonarrDir = config.hostConfig.dataDir + "/sonarr";
-      radarrDir = config.hostConfig.dataDir + "/radarr";
-      bazarrDir = config.hostConfig.dataDir + "/bazarr";
-      prowlarrDir = config.hostConfig.dataDir + "/prowlarr";
-      sabnzbdDir = config.hostConfig.dataDir + "/sabnzbd";
+      jellyfinDir = config.hostConfig.dataDir + "/mediaserver/jellyfin";
+      jellyseerrDir = config.hostConfig.dataDir + "/mediaserver/jellyseerr";
+      sonarrDir = config.hostConfig.dataDir + "/mediaserver/sonarr";
+      radarrDir = config.hostConfig.dataDir + "/mediaserver/radarr";
+      bazarrDir = config.hostConfig.dataDir + "/mediaserver/bazarr";
+      prowlarrDir = config.hostConfig.dataDir + "/mediaserver/prowlarr";
+      lidarrDir = config.hostConfig.dataDir + "/mediaserver/lidarr";
+      sabnzbdDir = config.hostConfig.dataDir + "/mediaserver/sabnzbd";
       libraryDir = config.hostConfig.dataDir + "/library";
     };
 
@@ -96,6 +97,7 @@ in
         "d ${cfg.dirs.prowlarrDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.bazarrDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.sabnzbdDir} 0775 ${cfg.user} ${cfg.group} -"
+        "d ${cfg.dirs.lidarrDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.jellyseerrDir} 0775 ${cfg.user} ${cfg.group} -"
         "d ${cfg.dirs.libraryDir} 0775 ${cfg.user} ${cfg.group} -"
       ];
@@ -142,6 +144,15 @@ in
         user = "${cfg.user}";
         group = "${cfg.group}";
         dataDir = "${cfg.dirs.sonarrDir}";
+        openFirewall = false;
+      };
+
+      services.lidarr = {
+        package = pkgs-unstable.lidarr;
+        enable = true;
+        user = "${cfg.user}";
+        group = "${cfg.group}";
+        dataDir = "${cfg.dirs.lidarrDir}";
         openFirewall = false;
       };
 
@@ -233,6 +244,20 @@ in
             '';
           };
         };
+        virtualHosts."lidarr.${cfg.domainName}" = {
+    	  sslCertificate = "/data/certificates/fullchain.pem";  # Path to your SSL certificate
+    	  sslCertificateKey = "/data/certificates/key.pem";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8686";
+            proxyWebsockets = true;
+            extraConfig = ''
+              allow 127.0.0.1;
+              allow 10.0.0.0/8;
+              deny all;               # Deny all other traffic
+            '';
+          };
+        };
         virtualHosts."prowlarr.${cfg.domainName}" = {
     	  sslCertificate = "/data/certificates/fullchain.pem";  # Path to your SSL certificate
     	  sslCertificateKey = "/data/certificates/key.pem";
@@ -281,7 +306,7 @@ in
 
   services.restic.backups = (config.lib.hostConfig.mkRestic {
    inherit app;
-   paths = [ cfg.dirs.jellyfinDir cfg.dirs.jellyseerrDir cfg.dirs.radarrDir cfg.dirs.sonarrDir cfg.dirs.prowlarrDir cfg.dirs.bazarrDir cfg.dirs.sabnzbdDir  ];
+   paths = [ cfg.dirs.jellyfinDir cfg.dirs.jellyseerrDir cfg.dirs.radarrDir cfg.dirs.sonarrDir cfg.dirs.lidarrDir cfg.dirs.prowlarrDir cfg.dirs.bazarrDir cfg.dirs.sabnzbdDir  ];
    excludePath = [
     "metadata"
     "data"
