@@ -6,5 +6,6 @@
       ./kamstrup-mqtt
       ./zigbee2mqtt
       ./mosquitto
+      ./anythingllm
     ];
 }
