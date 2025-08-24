@@ -26,6 +26,8 @@
         kamstrup-mqtt.enable = true;
         # system
         prometheus.enable = true;
+        # ai
+        anythingllm.enable = true;
       };
     };
   };
