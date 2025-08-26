@@ -28,14 +28,26 @@ in
       "d ${appData}/seahub-data 0755 ${user} ${group} -"
     ];
 
-    services.${app} = {
+    services.seafile = {
       enable = true;
       user = "${user}";
       group = "${group}";
       dataDir = "${appData}/seafile-data";
-      seahubPort = port;
-      openFirewall = false;
-      settings.server.externalDomain = "https://${app}.${domainName}";
+      ccnetSettings = cfg.ccnetSettings // {
+        General = {
+          SERVICE_URL = "https://${app}.${domainName}";
+        };
+      };
+      seafileSettings = cfg.seafileSettings // {
+        fileserver = {
+          port = port;
+          host = "ipv4:127.0.0.1";
+        };
+      };
+      seahubAddress = "[::1]:${toString port}";
+      workers = 4;
+      adminEmail = cfg.adminEmail or (throw "adminEmail must be set");
+      initialAdminPassword = cfg.initialAdminPassword or (throw "initialAdminPassword must be set");
     };
 
     users.users.${user} = {
