@@ -8,7 +8,7 @@ let
   domainName = config.hostConfig.domainName;
   user = "seafile";
   group = "seafile";
-  port = 8000;
+  port = 8082;
 
 in
 {
