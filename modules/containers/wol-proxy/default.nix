@@ -39,7 +39,7 @@ in
     services.nginx = {
       enable = true;
       recommendedProxySettings = true;
-      virtualHosts."${app}.${domainName}" = {
+      virtualHosts."ollama.${domainName}" = {
         useACMEHost = "${domainName}";
         forceSSL = true;
         locations."/" = {
