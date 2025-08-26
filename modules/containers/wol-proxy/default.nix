@@ -27,7 +27,7 @@ in
     virtualisation.oci-containers.containers.${app} = {
       autoStart = true;
       image = "${image}";
-      user = "${uid}:${gid}";
+      user = "${builtins.toString uid}:${builtins.toString gid}";
       volumes = [
         "${appData}/config.toml:/app/config.toml"
         "/etc/localtime:/etc/localtime:ro"
