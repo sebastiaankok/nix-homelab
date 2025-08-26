@@ -24,24 +24,6 @@ in
 
   config = mkIf cfg.enable {
 
-    # Create the group first, with a specific GID
-    users.groups.${group} = {
-      gid = gid;  # Set the GID explicitly
-    };
-
-    # Create the user, assign to the group, and set a specific UID
-    users.users.${user} = {
-      isSystemUser = true;  # Ensures the user is treated as a system user
-      uid = uid;  # Explicitly set the UID
-      group = "${group}";  # Assign the user to the predefined group
-      home = "${appData}";  # Define home directory for the service
-      createHome = true;  # Automatically create the home directory
-    };
-
-    systemd.tmpfiles.rules = [
-      "d ${appData} 0750 ${user} ${group} -" #The - disables automatic cleanup, so the file wont be removed after a period
-    ];
-
     virtualisation.oci-containers.containers.${app} = {
       autoStart = true;
       image = "${image}";
