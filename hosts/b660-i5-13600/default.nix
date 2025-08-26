@@ -31,7 +31,7 @@
         # network
         wol-proxy.enable = true; # Added wol-proxy service and enabled it.
         # files
-        seafile. enable = true;
+        seafile.enable = false;
       };
     };
   };
