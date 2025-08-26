@@ -30,9 +30,8 @@
         anythingllm.enable = true;
         # network
         wol-proxy.enable = true; # Added wol-proxy service and enabled it.
-        seafile = {
-          enable = true;
-        };
+        # files
+        seafile. enable = true;
       };
     };
   };
