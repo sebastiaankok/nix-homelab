@@ -7,9 +7,7 @@ let
   cfg = config.hostConfig.services.${app};
   appData = config.hostConfig.dataDir + "/${app}";
   domainName = config.hostConfig.domainName;
-  user = "nobody";
-  group = "nobody";
-  port = 8080;
+  port = 8085;
   uid = 65534;
   gid = 65534;
 
