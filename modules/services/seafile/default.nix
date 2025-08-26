@@ -8,7 +8,7 @@ let
   domainName = config.hostConfig.domainName;
   user = "seafile";
   group = "seafile";
-  port = 8082;
+  port = 8083;
 
 in
 {
@@ -33,12 +33,12 @@ in
       user = "${user}";
       group = "${group}";
       dataDir = "${appData}/seafile-data";
-      ccnetSettings = cfg.ccnetSettings // {
+      ccnetSettings = {
         General = {
           SERVICE_URL = "https://${app}.${domainName}";
         };
       };
-      seafileSettings = cfg.seafileSettings // {
+      seafileSettings = {
         fileserver = {
           port = port;
           host = "ipv4:127.0.0.1";
@@ -46,15 +46,8 @@ in
       };
       seahubAddress = "[::1]:${toString port}";
       workers = 4;
-      adminEmail = cfg.adminEmail or (throw "adminEmail must be set");
-      initialAdminPassword = cfg.initialAdminPassword or (throw "initialAdminPassword must be set");
-    };
-
-    users.users.${user} = {
-      isSystemUser = true;
-      createHome = true;
-      homeDirectory = appData;
-      extraGroups = [ "video" "render" ];
+      adminEmail = "seafile@${domainName}";
+      initialAdminPassword = "initialPassword";
     };
 
     services.nginx = {
@@ -63,7 +56,7 @@ in
         useACMEHost = "${domainName}";
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://[::1]:${toString port}";
+          proxyPass = "http://127.0.0.1:${toString port}";
           proxyWebsockets = true;
         };
         # Allow large files to be uploaded
