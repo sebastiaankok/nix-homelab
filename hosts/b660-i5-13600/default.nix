@@ -40,7 +40,6 @@
   # Host-specific configuration options
   imports = [
     ./hardware-configuration.nix
-    ../../modules/services/seafile/default.nix
   ];
 
 }
