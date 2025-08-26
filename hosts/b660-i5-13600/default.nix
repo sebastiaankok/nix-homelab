@@ -28,10 +28,11 @@
         prometheus.enable = true;
         # ai
         anythingllm.enable = true;
+        # network
+        wol-proxy.enable = true; # Added wol-proxy service and enabled it.
       };
     };
   };
-
 
   # Host-specific configuration options
   imports = [
