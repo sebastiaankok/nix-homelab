@@ -30,6 +30,9 @@
         anythingllm.enable = true;
         # network
         wol-proxy.enable = true; # Added wol-proxy service and enabled it.
+        seafile = {
+          enable = true;
+        };
       };
     };
   };
@@ -37,6 +40,7 @@
   # Host-specific configuration options
   imports = [
     ./hardware-configuration.nix
+    ../../modules/services/seafile/default.nix
   ];
 
 }
