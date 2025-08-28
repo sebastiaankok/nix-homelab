@@ -1,13 +1,13 @@
 # NixOS Homelab
 
-This repository manages my personal NixOS homelab and using flakes, enabling modularity, scalability, and ease of configuration across multiple machines.
+This repository manages my personal NixOS homelab using flakes, enabling modularity, scalability, and ease of configuration across multiple machines.
 
-## Install from github
+## Install from GitHub
 ```bash
 nixos-rebuild switch --flake github:sebastiaankok/nix-homelab#HOSTNAME
 ```
 
-## Update a host from local path
+## Update a Host from Local Path
 
 ```bash
 cd ~/nix-config
@@ -18,12 +18,12 @@ nixos-rebuild switch --flake . # This will automatically pick the configuration 
 
 - **`home/`**: User-specific configurations (currently unused).
 - **`hosts/`**: Machine-specific configs:
-  - `b660-i5-13600/`, `dell-i5-7300U/`, `m2macbook/`.
+  - `b660-i5-13600/`, `dell-i5-7300U/`.
 - **`modules/`**: Reusable service and system modules:
   - **Containers**: Configs for `frigate/`, `home-assistant/`.
   - **Services**: Modules for `mosquitto/`, `plex/`, `prowlarr/`, `radarr/`, `sonarr/`, `sabnzbd/`, `zigbee2mqtt/`.
   - **System**: Configurations for `acme/` (SSL certificates), `restic/` (backup management).
-- **`profiles/`**: Role-based configurations (e.g., `server/`) for sharing setups across hosts.
+- **`profiles/`**: Role-based configurations (e.g., `workstation.nix`) for sharing setups across hosts.
 - **`flake.nix`**: Main configuration for defining hosts and services.
 - **`flake.lock`**: Locks inputs for reproducibility.
 - **`README.md`**: Documentation.
@@ -35,20 +35,25 @@ nixos-rebuild switch --flake . # This will automatically pick the configuration 
 - **SOPS Integration**: Secure secrets management via encrypted files.
 - **Restic Support**: Automated backup management with custom prune and backup arguments.
 
-
-## Restoring backups
+## Restoring Backups
 
 ### Local
-- `restic -r /storage/backups/<app> restore --target <path> latest`
+```bash
+restic -r /storage/backups/<app> restore --target <path> latest
+```
 
 ### Backblaze B2
-- `restic -r s3:s3.eu-central-003.backblazeb2.com/nixos-homelab/backups/<app> restore --target <path> latest`
+```bash
+restic -r s3:s3.eu-central-003.backblazeb2.com/nixos-homelab/backups/<app> restore --target <path> latest
+```
 
 ### Scaleway Glacier
 [Scaleway glacier restore](https://www.scaleway.com/en/docs/storage/object/how-to/restore-an-object-from-glacier/)
-- `restic -r s3:s3.nl-ams.scw.cloud/nixos-homelab/backups/<app> restore --target <path> latest`
-
+```bash
+restic -r s3:s3.nl-ams.scw.cloud/nixos-homelab/backups/<app> restore --target <path> latest
+```
 
 ## Links & References
 
-- [truxnell/dotfiles](https://github.com//truxnell/nix-config/)
+- [truxnell/dotfiles](https://github.com/truxnell/nix-config/)
+```
