@@ -6,7 +6,7 @@
         settings = {
           provider = "openai"; # Use OpenAI-compatible provider for LM Studio
           openai = {
-            endpoint = "http://:1234/v1"; # LM Studio's default endpoint
+            endpoint = "http://lmstudio.${(import ../../../hosts/dell-i5-7300U/secrets.nix).domainName}/v1"; # LM Studio's default endpoint with domain name from secrets
             # model = "qwen3-coder-30b"; # Replace with your model name from LM Studio
             model = "openai/gpt-oss-20b";
             api_key_name = ""; # No API key needed for local LM Studio
