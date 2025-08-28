@@ -71,7 +71,7 @@
     kubernetes-helm
     argocd
 
-    ## gui
-    cyberduck
+    ## ai
+    aider-chat-full
   ];
 }

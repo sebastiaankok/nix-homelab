@@ -146,7 +146,7 @@
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
   # When in detached HEAD state, show @commit where branch normally goes.
   typeset -g POWERLEVEL9K_VCS_COMMIT_ICON='@'
-  # Don't show staged, unstaged, untracked indicators.
+  # Don't show staged, unstaged or untracked indicators.
   typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED}_ICON=
   # Show '*' when there are staged, unstaged or untracked files.
   typeset -g POWERLEVEL9K_VCS_DIRTY_ICON='*'
@@ -248,5 +248,5 @@ source <(kubectl completion zsh)
 compdef kubecolor='kubectl'
 compdef k='kubecolor'
 
-export LM_STUDIO_API_KEY=dummy-api-key
-export LM_STUDIO_API_BASE=https://ollama.$DOMAIN_NAME/v1
+export LM_STUDIO_API_KEY="dummy-api-key"
+export LM_STUDIO_API_BASE="https://lmstudio.$DOMAIN_NAME/v1"
