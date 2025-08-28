@@ -2,8 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  # Import secrets to access domainName
+  secrets = import ./secrets.nix;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -112,6 +116,11 @@
     kdePackages.signond
   ];
 
+  # Set environment variables system-wide
+  environment.sessionVariables = {
+    DOMAIN_NAME = secrets.domainName;
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -138,5 +147,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
