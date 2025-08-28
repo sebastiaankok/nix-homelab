@@ -247,3 +247,6 @@ compinit
 source <(kubectl completion zsh)
 compdef kubecolor='kubectl'
 compdef k='kubecolor'
+
+export LM_STUDIO_API_KEY=dummy-api-key
+export LM_STUDIO_API_BASE=https://ollama.$DOMAIN_NAME/v1
