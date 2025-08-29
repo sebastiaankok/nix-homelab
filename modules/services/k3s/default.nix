@@ -41,10 +41,5 @@ in
       6443
       10250
     ];
-
-    # Set up k3s directory structure
-    systemd.tmpfiles.rules = [
-      "d /var/lib/k3s 0755 ${user} ${group} -"
-    ];
   };
 }
