@@ -98,11 +98,18 @@
     match.ExtraWhitespace = "\\s\\+$";
 
     # Example on how to change settings for certain files.
-    autoCmd = [{
-      event = "FileType";
-      pattern = "nix";
-      command = "setlocal tabstop=2 shiftwidth=2";
-    }];
+    autoCmd = [
+      {
+        event = "FileType";
+        pattern = "nix";
+        command = "setlocal tabstop=2 shiftwidth=2";
+      }
+      {
+        event = "FileType";
+        pattern = "helm";
+        command = "LspRestart";
+      }
+    ];
   };
   imports = [
     ./completion.nix
