@@ -6,6 +6,7 @@
     # languages
     python3
     python311Packages.pip
+    python3Packages.pip
     pipx
     virtualenv
     go
@@ -44,6 +45,8 @@
 
     # network
     nmap
+    wireguard-go
+    wireguard-tools
 
     # databases
     postgresql
@@ -69,6 +72,7 @@
     stern
     cilium-cli
     kubernetes-helm
+    helm-ls
     argocd
 
     ## ai
