@@ -2,19 +2,32 @@
   programs.nixvim = {
     plugins = {
       avante = {
-        enable = false;
+        enable = true;
         settings = {
-          provider = "openai"; # Use OpenAI-compatible provider for LM Studio
+          #mode = "legacy";
+          provider = "openai"; # Use Ollama provider
           openai = {
-            endpoint = "http://:1234/v1"; # LM Studio's default endpoint
-            # model = "qwen3-coder-30b"; # Replace with your model name from LM Studio
-            model = "openai/gpt-oss-20b";
-            api_key_name = ""; # No API key needed for local LM Studio
-            extra_request_body = {
-              max_tokens = 4096; # Adjust based on model capabilities
-              temperature = 0.7; # Adjust for desired randomness
+            endpoint = "http://127.0.0.1:8080/v1";
+            model = "unsloth/qwen3-coder-30b-a3b-instruct";
+            api_key_name = "";
+            api_key = "OPENAI_API_KEY";
+            options = {
+               max_tokens = "15285";
             };
           };
+          vendors = {
+            "ollama_suggests" = {
+              endpoint = "http://localhost:11434";
+              __inherited_from = "ollama";
+              model = "qwen2.5-coder:7b";
+              max_tokens = "128";
+            };
+          };
+
+          prompt_logger = {
+            enabled = true;
+          };
+
           mappings = {
             ask = "<leader>aa"; # Ask AI about code
             edit = "<leader>ae"; # Edit with AI
@@ -27,10 +40,17 @@
               next = "]x";
               prev = "[x";
             };
+            suggestion = {
+              accept = "<C-l>"; # Ctrl+l
+              next = "<C-n>"; # Ctrl+n
+              prev = "<C-p>"; # Ctrl+p
+              dismiss = "<C-]>"; # Keep Ctrl+]
+            };
           };
           behaviour = {
-            auto_suggestions = true; # Disable auto-suggestions if preferred
-            auto_apply = false; # Disable auto-applying changes
+            auto_suggestions = false; # Disable auto-suggestions if preferred
+            enable_token_counting = true;
+            auto_approve_tool_permissions = false;
           };
           windows = {
             width = 30; # Sidebar width
@@ -51,9 +71,7 @@
             debug = false;
             list_opener = "copen";
           };
-          hints = {
-            enabled = true;
-          };
+          hints = { enabled = true; };
         };
       };
     };
