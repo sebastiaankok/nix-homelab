@@ -1,0 +1,61 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: factorio
+  namespace: kube-system
+spec:
+  chart: app-template
+  repo: https://bjw-s-labs.github.io/helm-charts
+  targetNamespace: factorio
+  version: 3.7.3
+  valuesContent: |-
+    controllers:
+      factorio:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          factorio:
+            env:
+              TZ: "Europe/Amsterdam"
+              #SAVE_NAME: factorio-24mc
+              LOAD_LATEST_SAVE: true
+              UPDATE_MODS_ON_START: true
+              BIND: "0.0.0.0"
+              USERNAME: "d1g1g33k"
+              TOKEN: "4792638891b0b4243640e8836edd8d"
+              DLC_SPACE_AGE: false
+            image:
+              repository: factoriotools/factorio
+              tag: stable
+
+    service:
+      app:
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        controller: factorio
+        ports:
+          gameudp:
+            port: 34197
+            protocol: UDP
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: factorio-pvc
+        globalMounts:
+          - path: /factorio
+
+    metrics:
+      enabled: false
+      serviceMonitor:
+        interval: 3m
+        scrapeTimeout: 1m
+      prometheusRule:
+        enabled: true
+      exporter:
+        env:
+          port: 9794
+          additionalMetrics: true
+          unknownQueueItems: false
+
