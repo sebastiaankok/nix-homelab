@@ -3,7 +3,7 @@ with lib;
 
 let
   app = "frigate";
-  image = "ghcr.io/blakeblackshear/frigate:0.15.2";
+  image = "ghcr.io/blakeblackshear/frigate:0.16.1";
   cfg = config.hostConfig.services.${app};
   appData = config.hostConfig.dataDir + "/${app}";
   domainName = config.hostConfig.domainName;
