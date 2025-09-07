@@ -1,6 +1,6 @@
 { cfg, ... }:
 {
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 
   # Create a new user
   users.users.root = {

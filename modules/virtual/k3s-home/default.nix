@@ -36,6 +36,7 @@ in
     };
   };
 
+  # Create sops
   imports = [
     ./k3s-secrets.nix
   ];

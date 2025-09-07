@@ -4,7 +4,7 @@
     enable = true;
     #package = pkgs.k3s_1_33;
     role = "server";
-    #gracefulNodeShutdown.enable = true;
+    gracefulNodeShutdown.enable = true;
 
     extraFlags = [
       "--disable traefik"
@@ -15,6 +15,7 @@
       "--flannel-backend=none"
     ];
 
+    # -- Install secrets (mounted sops directory)
     manifests = {
       copy-secrets-job = {
         enable = true;
