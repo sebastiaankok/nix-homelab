@@ -43,6 +43,7 @@
     restic
     sops
     renovate
+    bpftools
   ];
 
   environment.shellAliases = {
