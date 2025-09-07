@@ -29,18 +29,18 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /dev/ser2net";
-        ExecStart = "${pkgs.socat}/bin/socat pty,raw,echo=0,link=/dev/ser2net/kamstrup-serial,mode=0660,owner=1003 tcp:rpi4-ser2net.${domainName}:20408";
+        ExecStart = "${pkgs.socat}/bin/socat pty,raw,echo=0,link=/dev/ser2net/kamstrup-serial,mode=0660,owner=1003 tcp:10.10.30.102:20408";
         Restart = "always";
       };
     };
 
     ## Secrets
-    sops.secrets."services/${app}/config" = {
-      sopsFile = ./secrets.sops.yaml;
-      owner = user;
-      inherit group;
-      restartUnits = [ "podman-${app}.service" ];
-    };
+    # sops.secrets."services/${app}/config" = {
+    #   sopsFile = ./secrets.sops.yaml;
+    #   owner = user;
+    #   inherit group;
+    #   restartUnits = [ "podman-${app}.service" ];
+    # };
 
     # Create the group first, with a specific GID
     users.groups.${group} = {
@@ -65,7 +65,7 @@ in
       image = "${image}";
       user = "${toString uid}:${toString gid}";  # Convert uid and gid to strings
       volumes = [
-        "/var/run/secrets/services/kamstrup-mqtt/config:/opt/kamstrup/config.yaml:ro"
+        "/data/kamstrup-mqtt/config.yaml:/opt/kamstrup/config.yaml:ro"
         "/dev/ser2net/kamstrup-serial:/dev/ser2net/kamstrup-serial"
       ];
       extraOptions = [
