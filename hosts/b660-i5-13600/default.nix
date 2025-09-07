@@ -30,21 +30,10 @@
         anythingllm.enable = true;
         # network
         wol-proxy.enable = true; # Added wol-proxy service and enabled it.
-        # files
-        seafile.enable = false;
+        # k3s
+        k3s.enable = false;
       };
     };
-    
-    # Set domain name as environment variable for zsh/p10k
-    environment.systemPackages = with lib; [
-      (pkgs.writeTextFile {
-        name = "domain-env";
-        text = ''
-          export DOMAIN_NAME="${config.hostConfig.domainName}"
-        '';
-        destination = "/etc/profile.d/domain-name.sh";
-      })
-    ];
   };
 
   # Host-specific configuration options
