@@ -6,10 +6,10 @@ let
     app = "k3s-home";
     vm = {
       hostname = "k3s-home";
-      hypervisor = "cloud-hypervisor";
+      hypervisor = "qemu";
       mac = "12:22:de:ad:be:ea";
       cpu = 8;
-      memory = 4096;
+      memory = 14 * 1024;
       network_mode = "private";
       interface = config.hostConfig.interface;
       user = config.hostConfig.user;
