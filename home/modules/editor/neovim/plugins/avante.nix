@@ -6,14 +6,11 @@
         settings = {
           provider = "openai"; # Use OpenAI-compatible provider for LM Studio
           openai = {
-            endpoint = "https://lmstudio.${config.hostConfig.domainName}/v1"; # LM Studio's default endpoint with domain name from host config
-            model = "qwen3-coder-30b-a3b-instruct";
+            endpoint = "http://127.0.0.1:8080/v1"; # LM Studio's default endpoint with domain name from host config
+            model = "unsloth/qwen3-coder-30b-a3b-instruct";
             api_key_name = ""; # No API key needed for local LM Studio
             extra_request_body = {
-              frequency_penalty = 0;
-              presence_penalty = 0;
-              temperature = 0.7;
-              top_p = 1;
+              max_tokens=15128;
             };
           };
           mappings = {
