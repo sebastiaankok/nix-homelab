@@ -73,6 +73,7 @@
     kubernetes-helm
     helm-ls
     argocd
+    velero
 
     ## ai
     aider-chat-full
