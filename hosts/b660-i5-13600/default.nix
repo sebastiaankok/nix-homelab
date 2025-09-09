@@ -18,12 +18,14 @@
           enable = true;
         };
         # nvr
-        frigate.enable = true;
+        # frigate.enable = true;
         # home automation
-        home-assistant.enable = true;
-        mosquitto.enable = true;
-        zigbee2mqtt.enable = true;
-        kamstrup-mqtt.enable = true;
+        ## Disable migration to k3s
+        # home-assistant.enable = true;
+        # mosquitto.enable = true;
+        # zigbee2mqtt.enable = true;
+        # kamstrup-mqtt.enable = true;
+
         # system
         prometheus.enable = true;
         # ai
