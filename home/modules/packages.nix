@@ -5,7 +5,6 @@
   home.packages = with pkgs; [
     # languages
     python3
-    python311Packages.pip
     python3Packages.pip
     pipx
     virtualenv
@@ -77,5 +76,8 @@
 
     ## ai
     aider-chat-full
+
+    ## gui
+    moonlight-qt
   ];
 }
