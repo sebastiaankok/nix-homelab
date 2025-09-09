@@ -249,4 +249,4 @@ compdef kubecolor='kubectl'
 compdef k='kubecolor'
 
 export LM_STUDIO_API_KEY="dummy-api-key"
-export LM_STUDIO_API_BASE="https://lmstudio.$DOMAIN_NAME/v1"
+export LM_STUDIO_API_BASE="http://127.0.0.1:8080/v1"
