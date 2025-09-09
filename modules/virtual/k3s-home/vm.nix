@@ -4,11 +4,12 @@
   hypervisor = cfg.vm.hypervisor;
   vcpu = cfg.vm.cpu;
   mem = cfg.vm.memory;
+  vsock.cid = 3;
   volumes = [
     {
       mountPoint = "/var/lib/rancher";
       image = "var-k3s.img";
-      size = 10 * 1024;
+      size = 100 * 1024;
     }
     {
       mountPoint = "/etc/rancher";
