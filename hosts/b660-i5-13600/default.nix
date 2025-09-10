@@ -29,9 +29,9 @@
         # system
         prometheus.enable = true;
         # ai
-        anythingllm.enable = true;
+        # anythingllm.enable = true;
         # network
-        wol-proxy.enable = true; # Added wol-proxy service and enabled it.
+        # wol-proxy.enable = true; # Added wol-proxy service and enabled it.
         # k3s
         k3s.enable = false;
       };
