@@ -26,7 +26,6 @@
         extraTls = [
           {
             hosts = [ "argocd.otohgunga.nl" ];
-            # secretName is optional depending on ingress controller
             secretName = "argocd-https-tls";
           }
         ];
@@ -50,6 +49,7 @@
           directory = {
             recurse = true;
             include = "*/application.yaml";
+            exclude = "{media/*,downloads/*}";
             jsonnet = {};
           };
         };
