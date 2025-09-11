@@ -14,9 +14,9 @@
       };
       services = {
         # photos
-        immich = {
-          enable = true;
-        };
+        #immich = {
+        #  enable = true;
+        #};
         # nvr
         # frigate.enable = true;
         # home automation
