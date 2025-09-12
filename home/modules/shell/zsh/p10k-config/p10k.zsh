@@ -146,7 +146,7 @@
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
   # When in detached HEAD state, show @commit where branch normally goes.
   typeset -g POWERLEVEL9K_VCS_COMMIT_ICON='@'
-  # Don't show staged, unstaged or untracked indicators.
+  # Don't show staged, unstaged, untracked indicators.
   typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED}_ICON=
   # Show '*' when there are staged, unstaged or untracked files.
   typeset -g POWERLEVEL9K_VCS_DIRTY_ICON='*'
@@ -248,5 +248,14 @@ source <(kubectl completion zsh)
 compdef kubecolor='kubectl'
 compdef k='kubecolor'
 
-export LM_STUDIO_API_KEY="dummy-api-key"
-export LM_STUDIO_API_BASE="http://127.0.0.1:8080/v1"
+# Aider config
+export LM_STUDIO_API_KEY=dummy-api-key
+export LM_STUDIO_API_BASE=https://llmstudio.otohgunga.nl/v1
+
+# Aider settings
+export AIDER_MODEL="lm_studio/unsloth/qwen3-coder-30b-a3b-instruct"
+export AIDER_DARK_MODE="True"
+export AIDER_CHAT_LANGUAGE="english"
+export AIDER_COMMIT_LANGUAGE="dutch"
+export AIDER_AUTO_COMMITS="False"
+export AIDER_SHOW_MODEL_WARNINGS="False"
