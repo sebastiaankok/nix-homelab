@@ -128,6 +128,7 @@
     ./plugins/trouble.nix
     ./plugins/markview.nix
     ./plugins/avante.nix
+    ./plugins/render-markdown.nix
   ];
 
 }
