@@ -7,11 +7,11 @@
       user = "sebastiaan";
       interface = "enp3s0";
       sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOTvwNAE0ZUIgEZRlZqw48o5Sw8gZuCPaYUPUHEp/vtg sebastiaan@linux.com";
-      system = {
-        acme = {
-          enable = true;
-        };
-      };
+      #system = {
+      #  acme = {
+      #    enable = true;
+      #  };
+      #};
       services = {
         # photos
         #immich = {
