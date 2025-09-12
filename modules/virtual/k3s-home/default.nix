@@ -39,6 +39,7 @@ in
   # Create sops
   imports = [
     ./k3s-secrets.nix
+    ./storage.nix
   ];
 
   #services.restic.backups = (config.lib.hostConfig.mkRestic {
