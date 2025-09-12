@@ -48,5 +48,11 @@
       tag = "${cfg.app}-sops";
       proto = "virtiofs";
     }
+    {
+      source = "/storage/library";
+      mountPoint = "/storage/library";
+      tag = "library";
+      proto = "virtiofs";
+    }
   ];
 }
