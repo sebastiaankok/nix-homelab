@@ -49,7 +49,6 @@
           directory = {
             recurse = true;
             include = "*/application.yaml";
-            exclude = "{media/*,downloads/*}";
             jsonnet = {};
           };
         };
